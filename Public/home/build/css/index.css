@@ -1,0 +1,306 @@
+@charset "UTF-8";
+@-webkit-keyframes loading {
+  0% {
+    background-position: 0 0; }
+  12.5% {
+    background-position: 48px 0; }
+  25% {
+    background-position: 96px 0; }
+  37.5% {
+    background-position: 144px 0; }
+  50% {
+    background-position: 192px 0; }
+  62.5% {
+    background-position: 240px 0; }
+  75% {
+    background-position: 288px 0; }
+  87.5% {
+    background-position: 336px 0; }
+  100% {
+    background-position: 384px 0; } }
+
+.loading {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  width: 48px;
+  height: 48px;
+  background-image: url("../images/loading.png");
+  -webkit-animation-duration: 500ms;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: step-start;
+  -webkit-animation-name: loading; }
+
+.selectedSlider {
+  -webkit-transform: scale(1.3);
+  -webkit-transition: -webkit-transform 0.1s;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 999; }
+
+.unselectSlider {
+  -webkit-transform: scale(1);
+  -webkit-transition: -webkit-transform 0.1s;
+  box-shadow: 0;
+  position: relative;
+  z-index: 1; }
+
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  overflow: hidden; }
+
+/**
+	 * 首页
+	 */
+#index {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url("../images/index-bg.jpg");
+  background-size: 100% 100%; }
+  #index img {
+    width: 16.71875%;
+    height: 24.03169%;
+    position: absolute;
+    right: 4.0625%; }
+  #index img:first-child {
+    top: 20.77465%; }
+  #index img:last-child {
+    bottom: 23.06338%; }
+
+/**
+	 * 关卡选择页
+	 */
+#choose {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url("../images/choose-bg.png");
+  background-size: 100% 100%; }
+  #choose img {
+    position: absolute; }
+  #choose .start-btn img {
+    width: 17.65625%;
+    height: 21.74296%;
+    top: 2.8169%; }
+  #choose .back-btn img {
+    width: 18.59375%;
+    height: 12.32394%;
+    bottom: 2.8169%; }
+  #choose .switch img {
+    width: 18.4375%;
+    height: 10.56338%;
+    position: absolute;
+    z-index: 2; }
+  #choose .switch .prev-map {
+    bottom: 9.6831%;
+    left: 46.875%; }
+  #choose .switch .next-map {
+    top: 9.6831%;
+    left: 46.875%; }
+  #choose .thumb-maps button:first-child {
+    position: absolute;
+    left: 50%; }
+  #choose .thumb-maps img:nth-child(odd) {
+    opacity: 0.6; }
+  #choose .thumb-maps .left {
+    width: 53.90625%;
+    height: 26.49648%;
+    bottom: 2.8169%;
+    right: 14.0625%;
+    z-index: 1; }
+  #choose .thumb-maps .middle {
+    width: 70.46875%;
+    height: 35.65141%;
+    top: 32.30634%;
+    right: 5.46875%; }
+  #choose .thumb-maps .right {
+    width: 53.90625%;
+    height: 26.49648%;
+    top: 2.8169%;
+    right: 14.0625%; }
+  #choose .thumb-maps button:last-child {
+    position: absolute;
+    left: 50%;
+    bottom: 1%; }
+
+/**
+	 * 个人中心页
+	 */
+#personal {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url("../images/di.png");
+  background-size: 100% 100%; }
+  #personal .back-btn {
+    position: absolute;
+    width: 18.59375%;
+    height: 12.32394%;
+    bottom: 4.0493%; }
+    #personal .back-btn img {
+      width: 100%;
+      height: 100%; }
+  #personal .user-face {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    position: absolute; }
+    #personal .user-face img {
+      transform: rotate(-90deg);
+      border: 0;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      width: 9.53125%;
+      height: 5.36972%; }
+  #personal .played-list {
+    height: 90.9331%;
+    width: 71.40625%;
+    position: absolute;
+    left: 26.40625%;
+    bottom: 5.01761%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap; }
+    #personal .played-list .played {
+      display: inline-table;
+      width: 31%;
+      height: 100%;
+      background-image: url("../images/test.png");
+      background-size: cover;
+      margin-left: 2.03125%; }
+      #personal .played-list .played .time, #personal .played-list .played .name, #personal .played-list .played .map {
+        float: left;
+        width: 100%;
+        height: 33.33%;
+        text-align: center; }
+      #personal .played-list .played .time {
+        position: relative; }
+        #personal .played-list .played .time .inner {
+          position: absolute;
+          bottom: 8%;
+          left: 35%; }
+          #personal .played-list .played .time .inner img {
+            float: left;
+            width: 55%;
+            transform: scale(0.75); }
+      #personal .played-list .played .name {
+        position: relative; }
+        #personal .played-list .played .name img {
+          position: absolute;
+          left: 35%;
+          bottom: 25%;
+          height: 50%; }
+      #personal .played-list .played .map img {
+        position: relative;
+        left: 5%;
+        height: 58.62676%;
+        width: 100%; }
+    #personal .played-list .played:first-child {
+      margin-left: 0; }
+
+/**
+	 * 游戏页
+	 */
+#game {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url("../images/index.png");
+  background-size: 100% 100%; }
+  #game .one-pic img {
+    width: 100%;
+    height: 100%;
+    border: 0; }
+  #game .time-counter-container {
+    height: 13.38028%;
+    width: 6.71875%;
+    position: fixed;
+    bottom: 15.3169%;
+    left: 7.5%; }
+    #game .time-counter-container img {
+      float: left;
+      width: 100%;
+      height: 20.91503%; }
+    #game .time-counter-container img:nth-child(3) {
+      width: 80%;
+      height: 10%;
+      margin-top: 5%;
+      margin-bottom: 5%;
+      margin-left: 12%; }
+  #game .refresh-container {
+    height: 7.74648%;
+    width: 13.75%;
+    position: absolute;
+    left: 2.65625%;
+    top: 4.57746%; }
+    #game .refresh-container img {
+      border: 0;
+      width: 100%;
+      height: 100%; }
+  #game .pic-container img {
+    width: 100%;
+    height: 100%;
+    border: 0; }
+  #game .view-origin-map-btn-contianer {
+    height: 7.74648%;
+    width: 13.75%;
+    position: absolute;
+    left: 2.65625%;
+    top: 14.26056%; }
+    #game .view-origin-map-btn-contianer img {
+      border: 0;
+      width: 100%;
+      height: 100%; }
+
+#result {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url("../images/result.png");
+  background-size: 100% 100%; }
+  #result .btn-container .share-btn, #result .btn-container .replay-btn {
+    width: 14.375%;
+    height: 36.53169%;
+    position: absolute;
+    top: 9.0669%; }
+    #result .btn-container .share-btn img, #result .btn-container .replay-btn img {
+      float: left;
+      width: 100%;
+      height: 100%; }
+  #result .btn-container .share-btn {
+    left: 44.6875%; }
+  #result .btn-container .replay-btn {
+    left: 63.4375%; }
+  #result .spend-time, #result .rank-info {
+    max-height: 13.99648%;
+    width: 7.5%;
+    position: absolute;
+    top: 58.71479%; }
+    #result .spend-time img, #result .rank-info img {
+      display: none;
+      float: left;
+      width: 100%;
+      height: 24%; }
+  #result .spend-time {
+    left: 47.96875%; }
+  #result .rank-info {
+    left: 67.1875%; }
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative; }

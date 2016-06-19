@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- 启用 WebApp 全屏模式 -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="apple-mobile-web-app-capable" content="yes" /><!-- home screen app 全屏 -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" /><!-- 状态栏 -->
+        <link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
+        <link rel="stylesheet" href="__PUBLIC__/home/build/css/index.css">
+        <script src="__PUBLIC__/home/src/libs/underscore.js"></script>
+        <script src="__PUBLIC__/home/src/libs/zepto.min.js"></script>
+        <script src="__PUBLIC__/home/src/libs/backbone.js"></script>
+        <title>重邮拼图系列</title>
+    </head>
+    <body>
+
+        <!-- 首页 -->
+        <script type="text/template" id="T_index">
+            <div id="index">
+                <img src="__PUBLIC__/home/build/images/personal-btn.png" class="personal-btn" onclick="">
+                <img src="__PUBLIC__/home/build/images/choose-btn.png" class="choose-btn" onclick="">
+            </div>
+        </script>
+
+        <!-- 选择关卡页 -->
+        <script type="text/template" id="T_choose">
+            <div id="choose">
+                <div class="back-btn">
+                    <img src="__PUBLIC__/home/build/images/back-btn.png" onclick="">
+                </div>
+                <div class="start-btn">
+                    <img src="__PUBLIC__/home/build/images/start-btn.png" onclick="">
+                </div>
+
+                <div class="switch">
+                    <img src="__PUBLIC__/home/build/images/left-point.png" class="prev-map" onclick="">
+                    <img src="__PUBLIC__/home/build/images/right-point.png" class="next-map" onclick="">
+                </div>
+                
+                <div class="thumb-maps">
+                    <img src="__PUBLIC__/home/build/images/map/middle/1.png" class="left" data-index="1">
+                    <img src="__PUBLIC__/home/build/images/map/middle/2.png" class="middle" data-index="2">
+                    <img src="__PUBLIC__/home/build/images/map/middle/null.png" class="right" data-index="3">
+                </div>
+            </div>
+        </script>
+
+        <!-- 个人中心页面 -->
+        <script type="text/template" id="T_personal">
+            <div id="personal">
+            	
+				
+                <div class="back-btn">
+                    <img src="__PUBLIC__/home/build/images/back-btn.png" onclick="">
+                </div>
+
+                <div class="user-face">
+                    <img src="__PUBLIC__/home/build/images/face.jpg">
+                </div>
+                
+                <div class="played-list">
+
+                	<% _.each(datas, function (game) { %>
+						<div class="played">
+	                        <div class="time">
+	                            <div class="inner">
+	                            	<% for (var i = 0; i < game.time.length; i++) { %>
+	                                	<img src="__PUBLIC__/home/build/images/clock/<%= game.time[i] %>.png">
+	                            	<% } %>
+	                            </div>
+	                        </div>
+	                        <div class="name">
+	                            <img src="__PUBLIC__/home/build/images/personal/<%= game.index %>/name.png">
+	                        </div>
+	                        <div class="map">
+	                            <img src="__PUBLIC__/home/build/images/personal/<%= game.index %>/map.png">
+	                        </div>
+	                    </div>
+
+                	<% }); %>
+
+                    <!-- <div class="played">
+                        <div class="time">
+                            <div class="inner">
+                                <img src="__PUBLIC__/home/build/images/clock/3.png">
+                                <img src="__PUBLIC__/home/build/images/clock/4.png">
+                                <img src="__PUBLIC__/home/build/images/clock/1.png">
+                            </div>
+                        </div>
+                        <div class="name">
+                            <img src="__PUBLIC__/home/build/images/whole.png">
+                        </div>
+                        <div class="map">
+                            <img src="__PUBLIC__/home/build/images/erjiao.png">
+                        </div>
+                    </div>
+                    <div class="played">
+                        <div class="time">
+                            <div class="inner">
+                                <img src="__PUBLIC__/home/build/images/clock/3.png">
+                                <img src="__PUBLIC__/home/build/images/clock/1.png">
+                            </div>
+                        </div>
+                        <div class="name">
+                            <img src="__PUBLIC__/home/build/images/whole.png">
+                        </div>
+                        <div class="map">
+                            <img src="__PUBLIC__/home/build/images/quanjing.png">
+                        </div>
+                    </div>
+                    <div class="played">
+                        <div class="time">
+                            <div class="inner">
+                                <img src="__PUBLIC__/home/build/images/clock/0.png">
+                                <img src="__PUBLIC__/home/build/images/clock/3.png">
+                            </div>
+                        </div>
+                        <div class="name">
+                            <img src="__PUBLIC__/home/build/images/whole.png">
+                        </div>
+                        <div class="map">
+                            <img src="__PUBLIC__/home/build/images/bajiao.png">
+                        </div>
+                    </div> -->
+
+                </div>
+                <!-- <img src="__PUBLIC__/home/build/images/played-bg.png" alt=""> -->
+
+                <!-- <div class="wrapper">
+                    <div class="loading"></div>
+                </div> -->
+            </div>
+        </script>
+
+        <!-- 游戏页 -->
+        <script type="text/template" id="T_game">
+            <div id="game">
+            <!-- <button class="goToChooseView">sdsds</button> -->
+                <div class="pic-container">
+                    <div class="one-pic"><img src="" /></div>
+                    <div class="one-pic"><img src="" /></div>
+                    <div class="one-pic"><img src="" /></div>
+                    <div class="one-pic"><img src="" /></div>
+                    <div class="one-pic"><img src="" /></div>
+                    <div class="one-pic"><img src="" /></div>
+                    <div class="one-pic"><img src="" /></div>
+                    <div class="one-pic"><img src="" /></div>
+                    <div class="one-pic"><img src="" /></div>
+                    <div class="one-pic"><img src="" /></div>
+                    <div class="one-pic"><img src="" /></div>
+                    <div class="one-pic"><img src="" /></div>
+                </div>
+
+                <div class="time-counter-container">
+                    <img src="__PUBLIC__/home/build/images/clock/0.png">
+                    <img src="__PUBLIC__/home/build/images/clock/0.png">
+                    <img src="__PUBLIC__/home/build/images/clock/colon.png">
+                    <img src="__PUBLIC__/home/build/images/clock/0.png">
+                    <img src="__PUBLIC__/home/build/images/clock/0.png">
+                </div>
+                
+                <div class="refresh-container" onclick="">
+                    <img src="__PUBLIC__/home/build/images/refresh.png">
+                </div>
+
+                <div class="view-origin-map-btn-contianer">
+                    <img src="__PUBLIC__/home/build/images/origin-btn.png">
+                </div>
+
+            </div>
+        </script>
+
+
+        <!-- 结果页 -->
+        <script type="text/template" id="T_result">
+            <div id="result">
+            
+                <div class="btn-container">
+                    <div class="share-btn">
+                        <img src="__PUBLIC__/home/build/images/share.png">
+                    </div>
+                    <div class="replay-btn">
+                        <img src="__PUBLIC__/home/build/images/replay.png">
+                    </div>
+                </div>
+        
+                <div class="spend-time">
+                    <img src="">        
+                    <img src="">        
+                    <img src="">        
+                    <img src="">    
+                </div>
+
+                <div class="rank-info">
+                    <img src="">        
+                    <img src="">        
+                    <img src="">        
+                    <img src="">        
+                </div>
+
+            </div>
+        </script>
+
+
+
+
+    </body>
+    <script src="__PUBLIC__/home/src/js/router.js"></script>
+    <script src="__PUBLIC__/home/src/js/view.js"></script>
+    <script>
+        $(function () {
+            Backbone.history.start();
+        });
+    </script>
+</html>

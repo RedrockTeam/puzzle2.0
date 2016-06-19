@@ -1,0 +1,1 @@
+var Router=Backbone.Router.extend({routes:{"/":"index"}}),router=new Router;router.on("route:index",function(){new indexView});

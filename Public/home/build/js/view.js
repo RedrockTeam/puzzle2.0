@@ -1,0 +1,1 @@
+var indexView=Backbone.View.extend({el:"#container",template:_.template($("#index").html()),initialize:function(){this.render()},render:function(){this.template({test:123})},events:{"click .comment":"postCommentFunc","click .praise":"articlePraiseFunc","click #searchBtn":"searchArticleFunc"}});
