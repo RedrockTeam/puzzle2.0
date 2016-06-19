@@ -1,0 +1,10 @@
+#gnore Files
+.idea
+.DS_Store
+Application/Runtime
+Application/Common/Conf/config.php
+Application/Home/Conf/config.php
+Application/.DS_Store
+Application/Admin/.DS_Store
+Application/Admin/View/.DS_Store
+Public/home/node_modules
