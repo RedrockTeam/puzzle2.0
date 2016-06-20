@@ -26,16 +26,17 @@
 	.loading {
 	    display: block;
 	    position: absolute;
-	    z-index: 1;
+	    z-index: 2;
 	    left: 50%;
 	    top: 50%;
 	    width: 48px;
 	    height: 48px;
-	    background-image: url('../images/loading.png');
-	    -webkit-animation-duration: 500ms;                        // 指定动画执行周期
-	    -webkit-animation-iteration-count: infinite;              // 指定动画执行次数
-	    -webkit-animation-timing-function: step-start;            // 指定动画执行方式
-	    -webkit-animation-name: loading;                          // 指定执行动画名称
+	    background: red;
+	    // background-image: url('../images/loading.png');
+	    // -webkit-animation-duration: 500ms;                        // 指定动画执行周期
+	    // -webkit-animation-iteration-count: infinite;              // 指定动画执行次数
+	    // -webkit-animation-timing-function: step-start;            // 指定动画执行方式
+	    // -webkit-animation-name: loading;                          // 指定执行动画名称
 	}
 
 	.selectedSlider {
@@ -158,7 +159,7 @@
 	 * 个人中心页
 	 */
 	#personal {
-		@include setBackground('di.png');
+		@include setBackground('personal-bg.png');
 		.back-btn {
 			position: absolute;
 			width: percentage(119 / $defaultWidth);
@@ -213,7 +214,7 @@
 					position: relative;
 					.inner {
 						position: absolute;
-						bottom: 8%;
+						bottom: 15%;
 						left: 35%;
 						img {
 							float: left;
@@ -258,11 +259,22 @@
 				border: 0;			
 			}
 		}
+		.back-btn {
+			position: absolute;
+			height: percentage(88 / $defaultHeight);
+			width: percentage(88 / $defaultWidth);
+	        left: percentage(15 / $defaultWidth);
+			bottom: percentage(53 / $defaultHeight);
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
 		.time-counter-container {
 			height: percentage(152 / $defaultHeight);
 			width: percentage(43 / $defaultWidth);
 			position: fixed;
-			bottom: percentage(174 / $defaultHeight);
+			bottom: percentage(196 / $defaultHeight);
 			left: percentage(48 / $defaultWidth);
 			img {
 				float: left;
@@ -311,6 +323,26 @@
 			  	height: 100%;
 			}
 	    }
+	
+		.origin-map {
+			@include setBackground('origin/1.png');
+			display: none;
+			position: absolute;
+	    	z-index: 2;
+	    	.origin-map-close-btn-container {
+				height: percentage(88 / $defaultHeight);
+				width: percentage(88 / $defaultWidth);
+				position: absolute;
+				left: percentage(17 / $defaultWidth);
+				top: percentage(52 / $defaultHeight);
+				img {
+					width: 100%;
+					height: 100%;
+					border: 0;
+				}
+			}
+		}
+
 	}
 
 	// 结果页面

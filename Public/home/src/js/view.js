@@ -254,16 +254,24 @@ var personalView = Backbone.View.extend({
         this.render();
     },
     render: function() {
-        var data = [{
-            index: 1,
-            time: ('30').split('').reverse().join('')
-        }, {
-            index: 2,
-            time: ('120').split('').reverse().join('')
-        }];
-        this.$el.html(this.template({
-            datas: data
-        }));
+        var self = this;
+        $.ajax({
+            url: 'index.php?s=/Home/Index/personal',
+            type: 'POST',
+            // data: data,
+            dataType: 'json',
+            success: function(res) {
+                if (res.status === 200) {
+                    self.$el.html(self.template({
+                        datas: res.data.list
+                    }));
+                }
+            },
+            error: function(xhr, type) {
+                alert('网络错误, 请重试!');
+            }
+        });
+
     },
     events: {
         'click .back-btn': 'goToIndexView', // 发表评论
@@ -290,7 +298,10 @@ var gameView = Backbone.View.extend({
     },
     events: {
         'click .one-pic': 'play',
+        'click .back-btn': 'goToChooseView',
         'click .refresh-container': 'rePlay',
+        'click .view-origin-map-btn-contianer': 'viewOriginMap',
+        'click .origin-map-close-btn-container': 'closeOriginMap',
         'click .goToChooseView': '_stop'
     },
     _initData: {
@@ -302,13 +313,13 @@ var gameView = Backbone.View.extend({
         randomArray: []
     },
     _initGame: function(mapIndex, refresh) {
-        // 先清空数据
-        this._destroyGame(refresh);
+        // 渲染当前页面模板
+        this.$el.html(this.template());
         // 缓存下当前游戏索引
         // 刷新游戏时使用
         this._initData.mapIndex = mapIndex;
-        // 渲染当前页面模板
-        this.$el.html(this.template());
+        // 先清空数据
+        this._destroyGame(refresh);
         // 修正滑块容器位置
         this._sliderContainerFix();
         // 随机分布滑块 
@@ -319,12 +330,11 @@ var gameView = Backbone.View.extend({
     // 回收数据
     _destroyGame: function(refresh) {
         $.each($('.one-pic'), function(index, element) {
-            $(element).removeClass('selectedSlider').addClass('unselectSlider');
+            $(element).removeClass('selectedSlider').removeClass('unselectSlider');
         });
         // 数据回收
         this._initData.randomArray = [];
         this._initData.prevIndex = undefined;
-        $('.pic-container').off('click', '.one-pic');
         return clock.stop();
     },
     play: function(event) {
@@ -342,7 +352,6 @@ var gameView = Backbone.View.extend({
         }
     },
     goToChooseView: function() {
-        this._destroyGame();
         router.navigate('/choose', {
             trigger: true
         });
@@ -352,6 +361,12 @@ var gameView = Backbone.View.extend({
     },
     // 结束游戏
     _stop: function() {
+        // 滑块解绑click事件
+        // backbone内部不会自动解绑事件
+        // 并且写在events里的事件
+        // 不能通过zepto/jquery中的off来解绑
+        // 源码里面找的 详见1171行
+        $(this.el).undelegate('.one-pic', 'click');
         var mapIndex = this._initData.mapIndex;
         var spendTime = util.getSpendTimeInfo(clock.stop());
         if (spendTime != 0) {
@@ -372,6 +387,13 @@ var gameView = Backbone.View.extend({
         }
         // var spendTime = util.getSpendTimeInfo(this._destroyGame());
         // 发起Ajax请求获得排名信息
+    },
+    viewOriginMap: function() {
+        $('.origin-map').css('display', 'block');
+        $('.origin-map').css('background-image', 'url(public/home/build/images/origin/' + this._initData.mapIndex + '.png)');
+    },
+    closeOriginMap: function() {
+        $('.origin-map').css('display', 'none');
     },
     _prevIndexChange: function(nextIndex, isSelf) {
         if (isSelf) {
@@ -422,7 +444,9 @@ var gameView = Backbone.View.extend({
         $(that).removeClass('unselectSlider');
         if ($(that).hasClass('selectedSlider')) {
             $(that).addClass('unselectSlider').removeClass('selectedSlider');
-            $(that).removeClass('unselectSlider');
+            setTimeout(function() {
+                $(that).removeClass('unselectSlider');
+            }, 50)
         } else {
             $(that).addClass('selectedSlider');
         }

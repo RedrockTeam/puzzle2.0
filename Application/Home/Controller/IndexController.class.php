@@ -10,61 +10,84 @@ class IndexController extends Controller {
     private $secret;
     private $jsapi_ticket;
 
+    public function score() {
+
+        $Score = M('score');
+
+        $data = M('score')->select();
+
+        foreach ($data as $index => $game) {
+        }
+        echo "<pre>";
+        print_r($this->_arraySort($data, 'spend_time'));
+        echo "</pre>";
+    }
+
     public function index(){
 
-        $this->code = I('get.code'); 
-        if ($this->code != null || $this->code != ''){ 
-            $this->code = I('get.code');
-            $this->info();
-            $this->getOpenid();
-            if (!$this->openid) {
-                $this->error('没有openid','http://hongyan.cqupt.edu.cn/puzzle');
-            }
-            //$this->getVerify();
-            $this->getTicket();
-            $this->getName();
-            $this->getStuid();
-            $signature = $this->JSSDKSignature();
-            $this->assign('openid', $this->openid);
-            $this->assign('signature', $signature);
-        }else{
-            $qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING'] : $_SERVER['QUERY_STRING'];
-            $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$qs);
-            Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
-        }
+        // $this->code = I('get.code'); 
+        // if ($this->code != null || $this->code != ''){
+        //     $this->code = I('get.code');
+        //     $this->info();
+        //     $this->getOpenid();
+        //     if (!$this->openid) {
+        //         $this->error('没有openid','http://hongyan.cqupt.edu.cn/puzzle');
+        //     }
+        //     //$this->getVerify();
+        //     $this->getTicket();
+        //     $this->getName();
+        //     $this->getStuid();
+        //     $signature = $this->JSSDKSignature();
+        //     $this->assign('openid', $this->openid);
+        //     $this->assign('signature', $signature);
+        // }else{
+        //     $qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING'] : $_SERVER['QUERY_STRING'];
+        //     $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$qs);
+        //     Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
+        // }
         
         $this->display();
     }
 
     public function getRank() {
 
-        $Game = M('game');
+        $Score = M('score');
 
-        $openid = '111';
+        $openid = 'ouRCyjgkHznG7ENZcgSxixnP4GZo';
         $mapId = I('post.mapIndex');
         $spendTime = I('post.spendTime');
 
         $microtime = explode(" ", microtime());
         $spendTime += substr($microtime[0], 0, 8);
 
-        $gameInfo = $Game->where(array(
+        $gameInfo = $Score->where(array(
             'map_id' => $mapId,
             'openid' => $openid
         ))->find();
 
-        $rankMap['spend_time'] = array('LT', $spendTime);
-        $rankMap['map_id'] = $mapId;
-        $thisRank = $Game->where($rankMap)->count() + 1;
+        if ($Score->where("map_id = '$mapId'")->find()) {
+            $rankMap['spend_time'] = array('LT', $spendTime);
+            $rankMap['map_id'] = $mapId;
+            $thisRank = $Score->where($rankMap)->count() + 1;
+        } else {
+            $thisRank = 1;
+        }
 
         // 如果不是第一次玩这张地图
         if ($gameInfo) {
             if ($spendTime < $gameInfo['spend_time']) {
-                $Game->where($map)->setField('spend_time', $spendTime);
+                $Score->where(array(
+                    'map_id' => $mapId,
+                    'openid' => $openid
+                ))->setField('spend_time', $spendTime);
             }
         } else {
-            $gameId = $Game->add(array(
+            $gameId = $Score->add(array(
                 'map_id' => $mapId,
                 'openid' => $openid,
+                'play_time' => time(),
+                'username' => 'root',
+                'stuId' => '2013214046',
                 'spend_time' => $spendTime
             ));
         }
@@ -201,11 +224,52 @@ class IndexController extends Controller {
         return $contents;
     }
 
+    private function _arraySort ($array, $key, $order = "asc"){ //asc是升序 desc是降序
+        $arr_nums = $arr = array();
+        foreach($array as $k => $v){
+            $arr_nums[$k] = $v[$key];
+        }
+        if ($order == 'asc'){
+            asort($arr_nums);
+        }else{
+            arsort($arr_nums);
+        }
+        foreach($arr_nums as $k => $v){
+            $arr[$k]=$array[$k];
+        }
+        return $arr;
+    }
+
 
     public function personal() {
 
-        $openid = '111';
+        $openid = 'ouRCyjgkHznG7ENZcgSxixnP4GZo';
 
+        $data = M('score')->where("openid = '$openid'")->select();
+
+        foreach ($data as $index => $value) {
+            unset($data[$index]['id']);
+            unset($data[$index]['stuId']);
+            unset($data[$index]['openid']);
+            unset($data[$index]['username']);
+            unset($data[$index]['play_time']);
+            $data[$index]['time'] = implode(array_reverse(str_split((string)floor($data[$index]['spend_time']), 1)));
+            $data[$index]['index'] = floor($data[$index]['map_id']);
+            // if ($data[$index]['time'] < 10) {
+            //     $data[$index]['time'] = '  '.$data[$index]['time'];
+            // }
+            unset($data[$index]['spend_time']);
+            unset($data[$index]['map_id']);
+        }
+
+
+        $this->ajaxReturn(array(
+            "status" => 200,
+            "info" => 'ok',
+            "data" => array(
+                'list' => $data
+            )
+        ));
 
     }
 

@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- 启用 WebApp 全屏模式 -->
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
         <meta name="apple-mobile-web-app-capable" content="yes" /><!-- home screen app 全屏 -->
         <meta name="apple-mobile-web-app-status-bar-style" content="black" /><!-- 状态栏 -->
         <link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
@@ -51,9 +50,8 @@
 
         <!-- 个人中心页面 -->
         <script type="text/template" id="T_personal">
+
             <div id="personal">
-            	
-				
                 <div class="back-btn">
                     <img src="__PUBLIC__/home/build/images/back-btn.png" onclick="">
                 </div>
@@ -63,7 +61,6 @@
                 </div>
                 
                 <div class="played-list">
-
                 	<% _.each(datas, function (game) { %>
 						<div class="played">
 	                        <div class="time">
@@ -82,64 +79,24 @@
 	                    </div>
 
                 	<% }); %>
-
-                    <!-- <div class="played">
-                        <div class="time">
-                            <div class="inner">
-                                <img src="__PUBLIC__/home/build/images/clock/3.png">
-                                <img src="__PUBLIC__/home/build/images/clock/4.png">
-                                <img src="__PUBLIC__/home/build/images/clock/1.png">
-                            </div>
-                        </div>
-                        <div class="name">
-                            <img src="__PUBLIC__/home/build/images/whole.png">
-                        </div>
-                        <div class="map">
-                            <img src="__PUBLIC__/home/build/images/erjiao.png">
-                        </div>
-                    </div>
-                    <div class="played">
-                        <div class="time">
-                            <div class="inner">
-                                <img src="__PUBLIC__/home/build/images/clock/3.png">
-                                <img src="__PUBLIC__/home/build/images/clock/1.png">
-                            </div>
-                        </div>
-                        <div class="name">
-                            <img src="__PUBLIC__/home/build/images/whole.png">
-                        </div>
-                        <div class="map">
-                            <img src="__PUBLIC__/home/build/images/quanjing.png">
-                        </div>
-                    </div>
-                    <div class="played">
-                        <div class="time">
-                            <div class="inner">
-                                <img src="__PUBLIC__/home/build/images/clock/0.png">
-                                <img src="__PUBLIC__/home/build/images/clock/3.png">
-                            </div>
-                        </div>
-                        <div class="name">
-                            <img src="__PUBLIC__/home/build/images/whole.png">
-                        </div>
-                        <div class="map">
-                            <img src="__PUBLIC__/home/build/images/bajiao.png">
-                        </div>
-                    </div> -->
-
                 </div>
-                <!-- <img src="__PUBLIC__/home/build/images/played-bg.png" alt=""> -->
 
-                <!-- <div class="wrapper">
+                <div class="wrapper">
                     <div class="loading"></div>
-                </div> -->
+                </div>
+
             </div>
         </script>
 
         <!-- 游戏页 -->
         <script type="text/template" id="T_game">
             <div id="game">
-            <button class="goToChooseView">sdsds</button>
+                <div class="back-btn">
+                    <img src="__PUBLIC__/home/build/images/game-back.png" onclick="">
+                </div>
+
+                <!-- <button class="goToChooseView">sdsds</button> -->
+
                 <div class="pic-container">
                     <div class="one-pic"><img src="" /></div>
                     <div class="one-pic"><img src="" /></div>
@@ -167,8 +124,14 @@
                     <img src="__PUBLIC__/home/build/images/refresh.png">
                 </div>
 
-                <div class="view-origin-map-btn-contianer">
+                <div class="view-origin-map-btn-contianer" onclick="">
                     <img src="__PUBLIC__/home/build/images/origin-btn.png">
+                </div>
+
+                <div class="origin-map" style="display: none">
+                    <div class="origin-map-close-btn-container">
+                        <img src="__PUBLIC__/home/build/images/close.png">
+                    </div>
                 </div>
 
             </div>
