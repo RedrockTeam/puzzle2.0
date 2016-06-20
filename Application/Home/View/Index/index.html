@@ -13,6 +13,7 @@
         <script src="__PUBLIC__/home/src/libs/underscore.js"></script>
         <script src="__PUBLIC__/home/src/libs/zepto.min.js"></script>
         <script src="__PUBLIC__/home/src/libs/backbone.js"></script>
+        <script src="__PUBLIC__/home/src/libs/fastclick.min.js"></script>
         <title>重邮拼图系列</title>
     </head>
     <body>
@@ -41,9 +42,9 @@
                 </div>
                 
                 <div class="thumb-maps">
-                    <img src="__PUBLIC__/home/build/images/map/middle/1.png" class="left" data-index="1">
-                    <img src="__PUBLIC__/home/build/images/map/middle/2.png" class="middle" data-index="2">
-                    <img src="__PUBLIC__/home/build/images/map/middle/null.png" class="right" data-index="3">
+                    <% _.each(mapData, function (map, index) { %>
+                        <img src="__PUBLIC__/home/build/images/choose/<%= map.index %>.png" class="<%= map.class %>" data-index="<%= index + 1 %>">
+                    <% }); %>
                 </div>
             </div>
         </script>
@@ -138,7 +139,7 @@
         <!-- 游戏页 -->
         <script type="text/template" id="T_game">
             <div id="game">
-            <!-- <button class="goToChooseView">sdsds</button> -->
+            <button class="goToChooseView">sdsds</button>
                 <div class="pic-container">
                     <div class="one-pic"><img src="" /></div>
                     <div class="one-pic"><img src="" /></div>
@@ -212,6 +213,7 @@
     <script src="__PUBLIC__/home/src/js/view.js"></script>
     <script>
         $(function () {
+        	FastClick.attach(document.body);
             Backbone.history.start();
         });
     </script>

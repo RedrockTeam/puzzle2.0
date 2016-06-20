@@ -7,7 +7,7 @@ var sliderImgPath = 'public/home/build/images/slider/';
 // 计时器
 var clock = (function() {
     // 计时器
-    var timer;
+    var timer, tempClockHand;
     // 游戏计时器指针
     var clockHand = {
         theUnit: 0, // 个位
@@ -52,6 +52,7 @@ var clock = (function() {
 
     var timeCounterStop = function(beyondMaxTime) {
         clearInterval(timer);
+        timer = undefined;
         tempClockHand = clockHand;
         clockHand = {
             theUnit: 0, // 个位
@@ -105,10 +106,13 @@ var util = (function() {
         });
     };
 
-    var getSpendTimeInfo = function(spendTime) {
+    var getSpendTimeInfo = function(spendTime, reverse) {
         var totalSecond = (spendTime.kilobit * 10 + spendTime.hundreds) * 60 + spendTime.decade * 10 + spendTime.theUnit;
-        // 字符串倒序
-        return String(totalSecond).split("").reverse().join("");
+        if (reverse) {
+            // 字符串倒序
+            return String(totalSecond).split("").reverse().join("");
+        }
+        return totalSecond;
     }
 
     // 设置cookie
@@ -178,9 +182,22 @@ var chooseView = Backbone.View.extend({
     el: 'body',
     template: _.template($('#T_choose').html()),
     initialize: function() {
-        this.$el.html(this.template());
+        this.currentMapindex = 2;
+        var mapData = [{
+            index: 1,
+            class: 'left'
+        }, {
+            index: 2,
+            class: 'middle'
+        }, {
+            index: 'null',
+            class: 'right'
+        }];
+        this.$el.html(this.template({
+            mapData: mapData
+        }));
     },
-    currentMapindex: 2,
+    currentMapindex: '',
     events: {
         'click .back-btn': 'goToIndexView', // 返回首页
         'click .start-btn': 'startGame',
@@ -188,7 +205,6 @@ var chooseView = Backbone.View.extend({
         'click .prev-map': 'prevMap'
     },
     goToIndexView: function() {
-        this.currentMapindex = 2;
         router.navigate('/', {
             trigger: true
         });
@@ -337,22 +353,25 @@ var gameView = Backbone.View.extend({
     // 结束游戏
     _stop: function() {
         var mapIndex = this._initData.mapIndex;
-        var spendTime = util.getSpendTimeInfo(this._destroyGame());
+        var spendTime = util.getSpendTimeInfo(clock.stop());
+        if (spendTime != 0) {
+            util.getRankInfo('index.php?s=/Home/Index/getRank', {
+                mapIndex: mapIndex,
+                spendTime: spendTime
+            }, function(res) {
+                var data = res.data;
+                if (res.status === 200) {
+                    // 显示结果页面
+                    router.navigate('/result/' + mapIndex + '/' + spendTime + '/' + data.rank, {
+                        trigger: true
+                    });
+                } else {
+                    console.log(res);
+                }
+            });
+        }
+        // var spendTime = util.getSpendTimeInfo(this._destroyGame());
         // 发起Ajax请求获得排名信息
-        util.getRankInfo('index.php?s=/Home/Index/getRank', {
-            spendTime: spendTime,
-            openid: $('html').data('openid')
-        }, function(res) {
-            var data = res.data;
-            if (res.status === 200) {
-                // 显示结果页面
-                router.navigate('/result/' + mapIndex + '/' + spendTime + '/' + data.rank, {
-                    trigger: true
-                });
-            } else {
-                alert('你的网络有问题, 刚刚的成绩未生效!');
-            }
-        });
     },
     _prevIndexChange: function(nextIndex, isSelf) {
         if (isSelf) {
@@ -403,9 +422,7 @@ var gameView = Backbone.View.extend({
         $(that).removeClass('unselectSlider');
         if ($(that).hasClass('selectedSlider')) {
             $(that).addClass('unselectSlider').removeClass('selectedSlider');
-            setTimeout(function() {
-                $(that).removeClass('unselectSlider');
-            }, 200);
+            $(that).removeClass('unselectSlider');
         } else {
             $(that).addClass('selectedSlider');
         }
@@ -463,6 +480,7 @@ var gameView = Backbone.View.extend({
 <!-- 结果页面 -->
 var resultView = Backbone.View.extend({
     el: 'body',
+    mapIndex: '',
     template: _.template($('#T_result').html()),
     initialize: function(mapIndex, time, rank) {
         this.mapIndex = mapIndex;
@@ -489,8 +507,9 @@ var resultView = Backbone.View.extend({
 
     // 结果页面耗时显示
     _spendTimeShow: function(spendTime) {
+        // spendTime = String(spendTime).split("").reverse().join("");
         var spendTimeImg = $('.spend-time img');
-        for (var i = spendTime.length - 1; i >= 0; i--) {
+        for (var i = 0; i <= spendTime.length - 1; i++) {
             spendTimeImg.eq(i).attr('src', rankImgPath + spendTime[i] + '.png').css('display', 'block');
         }
     }
