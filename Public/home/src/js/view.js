@@ -205,11 +205,13 @@ var chooseView = Backbone.View.extend({
         'click .prev-map': 'prevMap'
     },
     goToIndexView: function() {
+        $(this.el).undelegate('.next-map', 'click');
+        $(this.el).undelegate('.prev-map', 'click');
         router.navigate('/', {
             trigger: true
         });
     },
-    nextMap: function() {
+    nextMap: function(evt) {
         if (this.currentMapindex == 1) {
             this.currentMapindex = 3;
         } else {
@@ -239,6 +241,8 @@ var chooseView = Backbone.View.extend({
     },
     startGame: function() {
         if (this.currentMapindex != 3) {
+            $(this.el).undelegate('.next-map', 'click');
+            $(this.el).undelegate('.prev-map', 'click');
             router.navigate('/game/' + this.currentMapindex, {
                 trigger: true
             });
@@ -265,6 +269,17 @@ var personalView = Backbone.View.extend({
                     self.$el.html(self.template({
                         datas: res.data.list
                     }));
+                    // hack
+                    // 我也不知道为啥要写这段代码
+                    // 反正不写样式会蹦
+                    // 来不及了,先上车
+                    $.each($('.inner'), function(index, inner) {
+                        if ($(inner).find('img').length > 1) {
+                            $(inner).find('img').css('transform', 'scale(0.75)');
+                        } else {
+                            $(inner).css('left', '40%');
+                        }
+                    });
                 }
             },
             error: function(xhr, type) {
@@ -297,7 +312,6 @@ var gameView = Backbone.View.extend({
         this._initGame(mapIndex);
     },
     events: {
-        'click .one-pic': 'play',
         'click .back-btn': 'goToChooseView',
         'click .refresh-container': 'rePlay',
         'click .view-origin-map-btn-contianer': 'viewOriginMap',
@@ -329,8 +343,15 @@ var gameView = Backbone.View.extend({
     },
     // 回收数据
     _destroyGame: function(refresh) {
+        var self = this;
         $.each($('.one-pic'), function(index, element) {
             $(element).removeClass('selectedSlider').removeClass('unselectSlider');
+            // 先解绑所有事件
+            $(element).off('click');
+            // 再绑定事件
+            $(element).on('click', function(event) {
+                self.play(event);
+            });
         });
         // 数据回收
         this._initData.randomArray = [];
@@ -352,6 +373,7 @@ var gameView = Backbone.View.extend({
         }
     },
     goToChooseView: function() {
+        $(this.el).undelegate('.one-pic', 'click');
         router.navigate('/choose', {
             trigger: true
         });

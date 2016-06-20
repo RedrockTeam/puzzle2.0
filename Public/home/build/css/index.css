@@ -150,7 +150,9 @@ body, html {
     display: inline-block;
     padding: 0;
     margin: 0;
-    position: absolute; }
+    position: absolute;
+    top: 5.45775%;
+    left: 3.4375%; }
     #personal .user-face img {
       transform: rotate(-90deg);
       border: 0;
@@ -173,7 +175,7 @@ body, html {
       display: inline-table;
       width: 31%;
       height: 100%;
-      background-image: url("../images/test.png");
+      background-image: url("../images/played-bg.png");
       background-size: cover;
       margin-left: 2.03125%; }
       #personal .played-list .played .time, #personal .played-list .played .name, #personal .played-list .played .map {
@@ -189,8 +191,7 @@ body, html {
           left: 35%; }
           #personal .played-list .played .time .inner img {
             float: left;
-            width: 55%;
-            transform: scale(0.75); }
+            width: 55%; }
       #personal .played-list .played .name {
         position: relative; }
         #personal .played-list .played .name img {

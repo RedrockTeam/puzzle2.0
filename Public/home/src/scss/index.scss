@@ -175,8 +175,8 @@
 			padding: 0;
 			margin: 0;
 			position: absolute;
-			// top: percentage(69 / $defaultHeight);
-			// left: percentage(22 / $defaultWidth);
+			top: percentage(62 / $defaultHeight);
+			left: percentage(22 / $defaultWidth);
 			img {
 				transform: rotate(-90deg);
 				border: 0;
@@ -201,7 +201,7 @@
 				display: inline-table;
 				width: 31%;
 				height: 100%;
-				background-image: url('../images/test.png');
+				background-image: url('../images/played-bg.png');
 				background-size: cover;
 				margin-left: percentage(13 / $defaultWidth);
 				.time, .name, .map {
@@ -219,7 +219,7 @@
 						img {
 							float: left;
 							width: 55%;
-							transform: scale(0.75);
+							// transform: scale(0.75);
 						}
 					}
 				}
