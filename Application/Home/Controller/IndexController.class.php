@@ -133,7 +133,7 @@ class IndexController extends Controller {
             $num = mt_rand(0,61);
             $this->string .= $str[$num];
         }
-        $this->secret =sha1(sha1($this->time).md5($this->string)."redrock");
+        $this->secret = sha1(sha1($this->time).md5($this->string)."redrock");
     }
     //判断关注
     private function getVerify(){
@@ -278,7 +278,7 @@ class IndexController extends Controller {
             "data" => array(
                 'list' => $data,
                 'openid' => $openid,
-                'face' => $this->getFace()
+                'face' => $this->getName()
             )
         ));
 
