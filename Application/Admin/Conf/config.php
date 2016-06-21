@@ -10,4 +10,14 @@
 	    'SESSION_AUTO_START'    =>  'true',
 	    'URL_MODEL'				=>  '1',
 	    'DB_PARAMS'             =>  array(\PDO::ATTR_CASE => \PDO::CASE_NATURAL),
+
+	    // 上传路径
+        'uploadConfig' => array(
+            'exts' => '',
+            'maxSize' => 0,
+            'saveName' => '',
+           	'replace' => true,
+            'autoSub' => false,
+            'rootPath' => './Public/home/build/images/'
+        )
 	);

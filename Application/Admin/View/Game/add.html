@@ -1,0 +1,94 @@
+    <layout name="layout" />
+    
+    <style>
+        
+
+    </style>
+        
+    <div id="page-wrapper">
+        <!--BEGIN TITLE & BREADCRUMB PAGE-->
+        <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+            <ol class="breadcrumb page-breadcrumb">
+                <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                <li><a href="#">Tables</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                <li class="active">Basic Tables</li>
+            </ol>
+            <div class="btn btn-blue reportrange hide"><i class="fa fa-calendar"></i>&nbsp;<span></span>&nbsp;report&nbsp;<i class="fa fa-angle-down"></i>
+                <input type="hidden" name="datestart" />
+                <input type="hidden" name="endstart" />
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!--END TITLE & BREADCRUMB PAGE-->
+        <!--BEGIN CONTENT-->
+        <div class="page-content">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">游戏信息</div>
+                        <div class="panel-body pan">
+                            <form method="post" action="__SELF__" enctype="multipart/form-data">
+                                <div class="form-body pal">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="inputName" class="control-label">游戏ID</label>
+                                                <div class="input-icon right">
+                                                    <input type="text" value="{$mapId}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="map_id" value="{$mapId}">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="inputName" class="control-label">游戏名</label>
+                                                <div class="input-icon right">
+                                                    <input type="text" placeholder="" name="game_name" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputSubject" class="control-label">选择页面图片</label>
+                                        <div class="input-icon right">
+                                            <input type="file" name="choose">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputSubject" class="control-label">个人中心缩略地图</label>
+                                        <div class="input-icon right">
+                                            <input type="file" name="personal[]">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputSubject" class="control-label">个人中心游戏名图</label>
+                                        <div class="input-icon right">
+                                            <input type="file" name="personal[]">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputSubject" class="control-label">查看原图图片</label>
+                                        <div class="input-icon right">
+                                            <input type="file" name="origin">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputSubject" class="control-label">滑块图片(可添加多张)</label>
+                                        <div class="input-icon right">
+                                            <input type="file" name="slider[]" multiple>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions text-right pal">
+                                    <button type="submit" class="btn btn-success">确认添加</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
