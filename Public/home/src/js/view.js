@@ -1,6 +1,6 @@
-var rankImgPath = 'public/home/build/images/rank/';
-var clockImgPath = 'public/home/build/images/clock/';
-var sliderImgPath = 'public/home/build/images/slider/';
+var rankImgPath = 'Public/home/build/images/rank/';
+var clockImgPath = 'Public/home/build/images/clock/';
+var sliderImgPath = 'Public/home/build/images/slider/';
 
 
 
