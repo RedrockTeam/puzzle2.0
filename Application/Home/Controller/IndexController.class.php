@@ -182,6 +182,18 @@ class IndexController extends Controller {
         $result = $this->curl_api($url, $t);
         session('username', $result->data->nickname);
     }
+    private function getFace(){
+        $t = array(
+            'string' => $this->string,
+            'token' => 'gh_68f0a1ffc303',
+            'timestamp' => $this->time,
+            'secret' => $this->secret,
+            'openid' => $this->openid,
+        );
+        $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
+        $result = $this->curl_api($url, $t);
+        return $result;
+    }
     private function getTicket(){
         $t = array(
         'string' => $this->string,
@@ -264,7 +276,9 @@ class IndexController extends Controller {
             "status" => 200,
             "info" => 'ok',
             "data" => array(
-                'list' => $data
+                'list' => $data,
+                'openid' => $openid,
+                'face' => $this->getFace()
             )
         ));
 
