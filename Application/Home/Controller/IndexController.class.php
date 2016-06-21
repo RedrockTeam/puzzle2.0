@@ -128,7 +128,7 @@ class IndexController extends Controller {
     {
         $this->time = time();
         $str = 'abcdefghijklnmopqrstwvuxyz1234567890ABCDEFGHIJKLNMOPQRSTWVUXYZ';
-        $this->string='';
+        $this->string = '';
         for($i = 0; $i < 16; $i++){
             $num = mt_rand(0,61);
             $this->string .= $str[$num];
@@ -271,14 +271,14 @@ class IndexController extends Controller {
             unset($data[$index]['map_id']);
         }
 
-
+        
         $this->ajaxReturn(array(
             "status" => 200,
             "info" => 'ok',
             "data" => array(
                 'list' => $data,
                 'openid' => $openid,
-                'face' => $this->getName()
+                'face' => $this->getStuid()
             )
         ));
 
