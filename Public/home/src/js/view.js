@@ -263,7 +263,7 @@ var personalView = Backbone.View.extend({
             url: 'index.php?s=/Home/Index/personal',
             type: 'POST',
             data: {
-                openid: $('html').data('openid')
+                openid: $('html').data('data-openid')
             },
             dataType: 'json',
             success: function(res) {
@@ -397,7 +397,7 @@ var gameView = Backbone.View.extend({
             util.getRankInfo('index.php?s=/Home/Index/getRank', {
                 mapIndex: mapIndex,
                 spendTime: spendTime,
-                openid: $('html').data('openid')
+                openid: $('html').data('data-openid')
             }, function(res) {
                 var data = res.data;
                 if (res.status === 200) {
