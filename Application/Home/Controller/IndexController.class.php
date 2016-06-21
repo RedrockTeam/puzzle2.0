@@ -31,7 +31,7 @@ class IndexController extends Controller {
             $this->info();
             $this->getOpenid();
             if (!$this->openid) {
-                $this->error('没有openid','http://hongyan.cqupt.edu.cn/puzzle');
+                $this->error('没有openid','http://hongyan.cqupt.edu.cn/puzzle2');
             }
             //$this->getVerify();
             $this->getTicket();
@@ -53,7 +53,7 @@ class IndexController extends Controller {
 
         $Score = M('score');
 
-        $openid = 'ouRCyjgkHznG7ENZcgSxixnP4GZo';
+        $openid = I('post.openid');
         $mapId = I('post.mapIndex');
         $spendTime = I('post.spendTime');
 
@@ -243,7 +243,7 @@ class IndexController extends Controller {
 
     public function personal() {
 
-        $openid = 'ouRCyjgkHznG7ENZcgSxixnP4GZo';
+        $openid = I('post.openid');
 
         $data = M('score')->where("openid = '$openid'")->select();
 

@@ -262,7 +262,9 @@ var personalView = Backbone.View.extend({
         $.ajax({
             url: 'index.php?s=/Home/Index/personal',
             type: 'POST',
-            // data: data,
+            data: {
+                openid: $('html').data('openid')
+            },
             dataType: 'json',
             success: function(res) {
                 if (res.status === 200) {
@@ -394,7 +396,8 @@ var gameView = Backbone.View.extend({
         if (spendTime != 0) {
             util.getRankInfo('index.php?s=/Home/Index/getRank', {
                 mapIndex: mapIndex,
-                spendTime: spendTime
+                spendTime: spendTime,
+                openid: $('html').data('openid')
             }, function(res) {
                 var data = res.data;
                 if (res.status === 200) {
@@ -412,7 +415,7 @@ var gameView = Backbone.View.extend({
     },
     viewOriginMap: function() {
         $('.origin-map').css('display', 'block');
-        $('.origin-map').css('background-image', 'url(public/home/build/images/origin/' + this._initData.mapIndex + '.png)');
+        $('.origin-map').css('background-image', 'url(Public/home/build/images/origin/' + this._initData.mapIndex + '.png)');
     },
     closeOriginMap: function() {
         $('.origin-map').css('display', 'none');
