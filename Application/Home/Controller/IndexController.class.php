@@ -10,18 +10,18 @@ class IndexController extends Controller {
     private $secret;
     private $jsapi_ticket;
 
-    public function score() {
+    // public function score() {
 
-        $Score = M('score');
+    //     $Score = M('score');
 
-        $data = M('score')->select();
+    //     $data = M('score')->select();
 
-        foreach ($data as $index => $game) {
-        }
-        echo "<pre>";
-        print_r($this->_arraySort($data, 'spend_time'));
-        echo "</pre>";
-    }
+    //     foreach ($data as $index => $game) {
+    //     }
+    //     echo "<pre>";
+    //     print_r($this->_arraySort($data, 'spend_time'));
+    //     echo "</pre>";
+    // }
 
     public function index(){
 
