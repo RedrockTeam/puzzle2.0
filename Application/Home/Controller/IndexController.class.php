@@ -98,8 +98,6 @@ class IndexController extends Controller {
                 'rank' => (string)$thisRank
             )
     	));
-
-
     }
 
 
@@ -113,6 +111,7 @@ class IndexController extends Controller {
         $data['signature'] = sha1($this->ToUrlParams($data));
         return $data;
     }
+
     private function ToUrlParams($urlObj){
         $buff = "";
         foreach ($urlObj as $k => $v) {
@@ -123,9 +122,9 @@ class IndexController extends Controller {
         $buff = trim($buff, "&");
         return $buff;
     }
+
     //时间戳；签名；随机数
-    private function info()
-    {
+    private function info() {
         $this->time = time();
         $str = 'abcdefghijklnmopqrstwvuxyz1234567890ABCDEFGHIJKLNMOPQRSTWVUXYZ';
         $this->string = '';
@@ -135,6 +134,7 @@ class IndexController extends Controller {
         }
         $this->secret = sha1(sha1($this->time).md5($this->string)."redrock");
     }
+
     //判断关注
     private function getVerify(){
         $t = array(
@@ -163,12 +163,14 @@ class IndexController extends Controller {
         );
         $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/bindVerify";
         $result = $this->curl_api($url, $t);
-        if ($result->stuId) {
-            session('stuId', $result->stuId);
-        }else{
-            $this->error('没有绑定小帮手');
-        }
+        return $result;
+        // if ($result->stuId) {
+        //     session('stuId', $result->stuId);
+        // }else{
+        //     $this->error('没有绑定小帮手');
+        // }
     }
+
     //username获取
     private function getName(){
         $t = array(
@@ -182,18 +184,7 @@ class IndexController extends Controller {
         $result = $this->curl_api($url, $t);
         session('username', $result->data->nickname);
     }
-    private function getFace(){
-        $t = array(
-            'string' => $this->string,
-            'token' => 'gh_68f0a1ffc303',
-            'timestamp' => $this->time,
-            'secret' => $this->secret,
-            'openid' => $this->openid,
-        );
-        $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
-        $result = $this->curl_api($url, $t);
-        return $result;
-    }
+   
     private function getTicket(){
         $t = array(
         'string' => $this->string,
@@ -271,7 +262,7 @@ class IndexController extends Controller {
             unset($data[$index]['map_id']);
         }
 
-        
+
         $this->ajaxReturn(array(
             "status" => 200,
             "info" => 'ok',
