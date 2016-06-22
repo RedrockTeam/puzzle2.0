@@ -126,8 +126,8 @@ class IndexController extends Controller {
         $userInfo = $this->curl_api($userInfoUrl, $verify);
         $stuInfo = $this->curl_api($stuIdUrl, $verify);
 
-        if ($stuInfo->stuId) {
-            $userInfo['stuId'] = $stuInfo->stuId;
+        if ($stuInfo['stuId']) {
+            $userInfo['stuId'] = $stuInfo['stuId'];
         }
 
         if ($userInfo) {
