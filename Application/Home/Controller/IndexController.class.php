@@ -150,6 +150,10 @@ class IndexController extends Controller {
         $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/webOAuth";
         $result = $this->curl_api($url, $t);
         $this->openid = $result->data->openid;
+        $url2 = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/bindVerify";
+        $t['openid'] = $this->openid;
+        $result2 = $this->curl_api($url2, $t);
+        $this->stuId = $result2->stuId;
     }
 
     /*curl通用函数*/
@@ -263,7 +267,7 @@ class IndexController extends Controller {
             "data" => array(
                 'list' => $data,
                 'openid' => $openid,
-                'face' => $this->getVerify()
+                'face' => $this->stuId
             )
         ));
 
