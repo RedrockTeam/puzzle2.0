@@ -4,7 +4,12 @@ use Think\Controller;
 class IndexController extends Controller {
 
     public function index() {
-        $this->display();
+
+        if (!session('username')) {
+            $this->redirect('Index/login');
+        } else {
+            $this->redirect('Game/index');
+        }
     }
 
 
@@ -19,7 +24,7 @@ class IndexController extends Controller {
     		$userInfo = M('admin')->where($map)->find();
     		if ($userInfo) {
     			session('username', $userInfo['username']);
-    			redirect('../Game/index');
+    			$this->redirect('Game/index');
     		} else {
     			$this->error('用户名或密码错误', 'login', 1);
     		}
@@ -28,7 +33,7 @@ class IndexController extends Controller {
 
     public function logout() {
     	session('username', null);
-    	redirect('login');
+    	$this->redirect('Index/login');
     }
     
     
