@@ -187,7 +187,7 @@ body, html {
         position: relative; }
         #personal .played-list .played .time .inner {
           position: absolute;
-          bottom: 15%;
+          bottom: 12%;
           left: 35%; }
           #personal .played-list .played .time .inner img {
             float: left;
