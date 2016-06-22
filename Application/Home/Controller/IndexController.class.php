@@ -126,8 +126,8 @@ class IndexController extends Controller {
         $userInfo = $this->curl_api($userInfoUrl, $verify);
         $stuInfo = $this->curl_api($stuIdUrl, $verify);
 
-        if ($stuInfo['stuId']) {
-            $userInfo['stuId'] = $stuInfo['stuId'];
+        if ($stuInfo->stuId) {
+            $userInfo->stuId = $stuInfo->stuId;
         }
 
         if ($userInfo) {
@@ -222,8 +222,8 @@ class IndexController extends Controller {
                 'map_id' => $mapId,
                 'openid' => $openid,
                 'play_time' => time(),
-                'username' => $userInfo['nickname'],
-                'stuId' => $userInfo['stuId'],
+                'username' => $userInfo->nickname,
+                'stuId' => $userInfo->stuId,
                 'spend_time' => $spendTime
             ));
         }
@@ -263,7 +263,7 @@ class IndexController extends Controller {
             "data" => array(
                 'list' => $data,
                 'openid' => $openid,
-                'face' => $userInfo['headimgurl']
+                'face' => $userInfo->headimgurl
             )
         ));
 

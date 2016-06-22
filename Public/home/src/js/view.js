@@ -269,6 +269,7 @@ var personalView = Backbone.View.extend({
             success: function(res) {
                 if (res.status === 200) {
                     self.$el.html(self.template({
+                        face: res.data.face,
                         datas: res.data.list
                     }));
                     // hack
