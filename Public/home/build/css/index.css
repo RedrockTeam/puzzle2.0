@@ -188,10 +188,12 @@ body, html {
         #personal .played-list .played .time .inner {
           position: absolute;
           bottom: 12%;
-          left: 35%; }
+          left: 43%; }
           #personal .played-list .played .time .inner img {
             float: left;
-            width: 65%; }
+            width: 51%; }
+            #personal .played-list .played .time .inner img:first-child {
+              transform: scale(1.5); }
       #personal .played-list .played .name {
         position: relative; }
         #personal .played-list .played .name img {

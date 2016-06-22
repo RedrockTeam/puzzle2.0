@@ -215,10 +215,13 @@
 					.inner {
 						position: absolute;
 						bottom: 12%;
-						left: 35%;
+						left: 43%;
 						img {
 							float: left;
-							width: 65%;
+							width: 51%;
+							&:first-child {
+								transform: scale(1.5);
+							}
 						}
 					}
 				}
