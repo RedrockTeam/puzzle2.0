@@ -135,7 +135,7 @@ class IndexController extends Controller {
             'token' => 'gh_68f0a1ffc303',
             'timestamp' => $time,
             'secret' => $secret,
-            'openid' => $this->openid,
+            'openid' => $this->getOpenid(),
         );
         $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
         $result = $this->curl_api($url, $t);
@@ -158,7 +158,7 @@ class IndexController extends Controller {
         );
         $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/webOAuth";
         $result = $this->curl_api($url, $t);
-        $this->openid = $result->data->openid;
+        return  $result->data->openid;
     }
 
     /*curl通用函数*/
