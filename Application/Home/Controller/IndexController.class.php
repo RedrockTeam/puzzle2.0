@@ -121,19 +121,28 @@ class IndexController extends Controller {
 
     //获取学号
     private function getStuid(){
+        $time = time();
+        $str = 'abcdefghijklnmopqrstwvuxyz1234567890ABCDEFGHIJKLNMOPQRSTWVUXYZ';
+        $string = '';
+        for ($i = 0; $i < 16; $i++) {
+            $num = mt_rand(0, 61);
+            $string .= $str[$num];
+        }
+        $secret = sha1(sha1($time).md5($string)."redrock");
+
         $t = array(
-            'string' => $this->string,
+            'string' => $string,
             'token' => 'gh_68f0a1ffc303',
-            'timestamp' => $this->time,
-            'secret' => $this->secret,
+            'timestamp' => $time,
+            'secret' => $secret,
             'openid' => $this->openid,
         );
         $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/bindVerify";
         $result = $this->curl_api($url, $t);
-        $this->stuId = $result->stuId;
-        // return $result;
+        // $this->stuId = $result->stuId;
+        return $result;
         // if ($result->stuId) {
-        //     session('stuId', $result->stuId);
+        //     return $result;
         // }else{
         //     $this->error('没有绑定小帮手');
         // }
@@ -150,10 +159,6 @@ class IndexController extends Controller {
         $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/webOAuth";
         $result = $this->curl_api($url, $t);
         $this->openid = $result->data->openid;
-        $url2 = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/bindVerify";
-        $t['openid'] = $this->openid;
-        $result2 = $this->curl_api($url2, $t);
-        $this->stuId = $result2->stuId;
     }
 
     /*curl通用函数*/
@@ -267,7 +272,7 @@ class IndexController extends Controller {
             "data" => array(
                 'list' => $data,
                 'openid' => $openid,
-                'face' => $this->stuId
+                'face' => $this->getStuid()
             )
         ));
 
