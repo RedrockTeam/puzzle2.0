@@ -276,13 +276,13 @@ var personalView = Backbone.View.extend({
                     // 我也不知道为啥要写这段代码
                     // 反正不写样式会蹦
                     // 来不及了,先上车
-                    $.each($('.inner'), function(index, inner) {
-                        if ($(inner).find('img').length > 1) {
-                            $(inner).find('img').css('transform', 'scale(0.75)');
-                        } else {
-                            $(inner).css('left', '40%');
-                        }
-                    });
+                    // $.each($('.inner'), function(index, inner) {
+                    //     if ($(inner).find('img').length > 1) {
+                    //         $(inner).find('img').css('transform', 'scale(0.75)');
+                    //     } else {
+                    //         $(inner).css('left', '40%');
+                    //     }
+                    // });
                 }
             },
             error: function(xhr, type) {
