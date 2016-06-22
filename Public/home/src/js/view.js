@@ -278,10 +278,7 @@ var personalView = Backbone.View.extend({
                     // 来不及了,先上车
                     $.each($('.inner'), function(index, inner) {
                         if ($(inner).find('img').length > 1) {
-                            if (!$(inner).hasClass('miao')) {
-                                $(inner).find('img').css('transform', 'scale(0.75)');
-                            }
-
+                            $(inner).find('img').css('transform', 'scale(0.75)');
                         } else {
                             $(inner).css('left', '40%');
                         }

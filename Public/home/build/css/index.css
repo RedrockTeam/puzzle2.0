@@ -192,6 +192,8 @@ body, html {
           #personal .played-list .played .time .inner img {
             float: left;
             width: 55%; }
+          #personal .played-list .played .time .inner .miao {
+            transform: scale(1.25) !important; }
       #personal .played-list .played .name {
         position: relative; }
         #personal .played-list .played .name img {
