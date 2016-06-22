@@ -263,6 +263,7 @@ class IndexController extends Controller {
             "data" => array(
                 'list' => $data,
                 'openid' => $openid,
+                'info' => $userInfo,
                 'face' => $userInfo->headimgurl
             )
         ));
