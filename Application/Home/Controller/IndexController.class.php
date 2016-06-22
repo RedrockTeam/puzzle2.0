@@ -17,8 +17,8 @@ class IndexController extends Controller {
         if ($this->code != null || $this->code != ''){
             $this->code = I('get.code');
             $this->info();
-            $this->getOpenid();
-            if (!$this->openid) {
+            $openid = $this->getOpenid();
+            if (!$openid) {
                 $this->error('没有openid','http://hongyan.cqupt.edu.cn/puzzle2');
             }
             //$this->getVerify();
@@ -26,7 +26,7 @@ class IndexController extends Controller {
             $this->getName();
             $this->getStuid();
             $signature = $this->JSSDKSignature();
-            $this->assign('openid', $this->openid);
+            $this->assign('openid', $openid);
             $this->assign('signature', $signature);
         }else{
             $qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING'] : $_SERVER['QUERY_STRING'];
@@ -80,7 +80,7 @@ class IndexController extends Controller {
             'token' => 'gh_68f0a1ffc303',
             'timestamp' => $this->time,
             'secret' => $this->secret,
-            'openid' => $this->openid,
+            'openid' => $this->getOpenid(),
         );
         $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/openidVerify";
         $result = $this->curl_api($url, $t);
@@ -99,7 +99,7 @@ class IndexController extends Controller {
             'token' => 'gh_68f0a1ffc303',
             'timestamp' => $this->time,
             'secret' => $this->secret,
-            'openid' => $this->openid,
+            'openid' => $this->getOpenid(),
         );
         $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
         $result = $this->curl_api($url, $t);
@@ -112,7 +112,7 @@ class IndexController extends Controller {
             'token' => 'gh_68f0a1ffc303',
             'timestamp' => $this->time,
             'secret' => $this->secret,
-            'openid' => $this->openid,
+            'openid' => $this->getOpenid(),
         );
         $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/apiJsTicket";
         $result = $this->curl_api($url, $t);
