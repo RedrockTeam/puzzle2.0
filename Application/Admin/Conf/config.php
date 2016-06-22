@@ -19,5 +19,6 @@
            	'replace' => true,
             'autoSub' => false,
             'rootPath' => './Public/home/build/images/'
-        )
+        ),
+
 	);

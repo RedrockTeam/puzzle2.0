@@ -5,11 +5,33 @@ class GameController extends Controller {
 
 	private $errorMsg = '';
 
+    public function _before_index(){
+        if (!session('username')) {
+            redirect('../Index/login');
+        }
+    }
+
     public function index() {
     	$Game = M('game');
     	$data = $Game->select();
     	$this->assign('data', $data);
     	$this->display('list');
+    }
+
+
+    public function rank() {
+        $games = M('game')->select();
+        $this->assign('games', $games);
+        $this->display();
+    }
+
+    public function detail($id) {
+        $count = M('score')->where("map_id = '$id'")->count();
+        $Page = new \Think\Page($count, 20);
+        $data = M('score')->where("map_id = '$id'")->order("spend_time")->limit($Page->firstRow.','.$Page->listRows)->select();
+        $this->assign('data', $data);
+        $this->assign('page', $Page->show());
+        $this->display();
     }
 
     public function add() {

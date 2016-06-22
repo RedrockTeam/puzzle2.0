@@ -1,0 +1,48 @@
+    <layout name="layout" />
+    
+    <style>
+        
+
+    </style>
+        
+    <div id="page-wrapper">
+        <!--BEGIN TITLE & BREADCRUMB PAGE-->
+        <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+            <ol class="breadcrumb page-breadcrumb">
+                <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">重邮地图拼拼看</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                <li class="active">成绩统计</li>
+            </ol>
+            <div class="btn btn-blue reportrange hide"><i class="fa fa-calendar"></i>&nbsp;<span></span>&nbsp;report&nbsp;<i class="fa fa-angle-down"></i>
+                <input type="hidden" name="datestart" />
+                <input type="hidden" name="endstart" />
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!--END TITLE & BREADCRUMB PAGE-->
+        <!--BEGIN CONTENT-->
+        <div class="page-content">
+
+            <div class="row">
+
+                <volist name="games" id="v">
+                    <div class="col-lg-6">
+                        <div class="portlet box portlet-blue">
+                            <div class="portlet-header">
+                                <div class="caption">{$v.game_name}</div>
+                            </div>
+                            <div style="overflow: hidden;" class="portlet-body">
+                                <a href="__CONTROLLER__/detail/id/{$v.map_id}">
+                                    <img src="__PUBLIC__/home/{$v.choose_img}" style="transform: rotate(90deg)">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </volist>
+
+
+            </div>
+
+        </div>
+    </div>
+
+

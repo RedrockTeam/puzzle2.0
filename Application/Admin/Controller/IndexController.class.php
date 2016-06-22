@@ -7,15 +7,29 @@ class IndexController extends Controller {
         $this->display();
     }
 
-    public function gameList() {
 
-    	$Game = M('game');
-
-    	$data = $Game->select();
-    	$this->assign('data', $data);
-    	$this->display('list');
-
-
+    public function login() {
+    	if (IS_GET) {
+    		layout(false);
+    		$this->display();
+    	} else {
+    		$password = I('post.password');
+    		$map['username'] = I('post.username');
+    		$map['password'] = md5(sha1($password));
+    		$userInfo = M('admin')->where($map)->find();
+    		if ($userInfo) {
+    			session('username', $userInfo['username']);
+    			redirect('../Game/index');
+    		} else {
+    			$this->error('用户名或密码错误', 'login', 1);
+    		}
+    	}
     }
 
+    public function logout() {
+    	session('username', null);
+    	redirect('login');
+    }
+    
+    
 }

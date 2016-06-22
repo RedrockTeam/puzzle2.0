@@ -1,38 +1,13 @@
     <layout name="layout" />
-    
-    <style>
-        
-        .choose_img {
-            transform: rotate(90deg);
-            width: 100px;
-            position: relative;
-            top: 30px;
-        }
-        .personal_img {
-            transform: rotate(90deg);
-            width: 100px;
-        }
-        .origin_img {
-            /*transform: rotate(90deg) scale(0.3);*/
-            width: 100px;
-            height: 150px;
-            transform: rotate(90deg);
-        }
-        .name_img {
-            transform: rotate(90deg);
-            width: 30px;
-        }
+	
 
-        
-
-    </style>
-        
-    <div id="page-wrapper">
+	<div id="page-wrapper">
         <!--BEGIN TITLE & BREADCRUMB PAGE-->
         <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
             <ol class="breadcrumb page-breadcrumb">
                 <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">重邮地图拼拼看</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                <li class="active">游戏列表</li>
+                <li><a href="#">成绩统计</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                <li class="active">成绩排名</li>
             </ol>
             <div class="btn btn-blue reportrange hide"><i class="fa fa-calendar"></i>&nbsp;<span></span>&nbsp;report&nbsp;<i class="fa fa-angle-down"></i>
                 <input type="hidden" name="datestart" />
@@ -53,23 +28,23 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>游戏ID</th>
-                                            <th>游戏名称</th>
-                                            <th>选择页面图片</th>
-                                            <th>个人中心图片</th>
-                                            <th>查看原图图片</th>
-                                            <th>游戏名字图片</th>
+                                            <th>名次</th>
+                                            <th>openid</th>
+                                            <th>微信名</th>
+                                            <th>学号</th>
+                                            <th>耗时</th>
+                                            <th>参与时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <volist name="data" id="v">
+                                        <volist name="data" id="v" key="key">
                                             <tr class="game">
-                                                <td>{$v.map_id}</td>
-                                                <td>{$v.game_name}</td>
-                                                <td><img src="__PUBLIC__/home/{$v.choose_img}" class="choose_img"></td>
-                                                <td><img src="__PUBLIC__/home/{$v.personal_img}" class="personal_img"></td>
-                                                <td><img src="__PUBLIC__/home/{$v.origin_img}" class="origin_img"></td>
-                                                <td><img src="__PUBLIC__/home/{$v.name_img}" class="name_img"></td>
+                                                <td>{$key}</td>
+                                                <td>{$v.openid}</td>
+                                                <td>{$v.username}</td>
+                                                <td>{$v.stuId}</td>
+                                                <td>{$v.spend_time}</td>
+                                                <td>{$v.play_time|date='Y-m-d', ###}</td>
                                             </tr>
                                         </volist>
                                     </tbody>
@@ -77,9 +52,9 @@
                             </div>
                         </div>
                     </div>
+                    {$page}
                 </div>
             </div>
 
         </div>
     </div>
-

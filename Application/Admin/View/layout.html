@@ -53,43 +53,21 @@
                     </div>
 
                     <div class="topbar-main">
-                        <a id="menu-toggle" href="#">
-                            <i class="fa fa-bars"></i>
-                        </a>
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="index.html">Dashboard</a>
                             </li>
                         </ul>
-                        <!-- 顶部搜索 -->
-                        <form id="topbar-search">
-                            <div class="input-group">
-                                <input type="text" placeholder="Search..." class="form-control" /><span class="input-group-btn"><a href="javascript:;" class="btn submit"><i class="fa fa-search"></i></a></span>
-                            </div>
-                        </form>
                         <!-- -->
                         <ul class="nav navbar navbar-top-links navbar-right mbn">
                             <li class="dropdown topbar-user">
                                 <a data-hover="dropdown" href="#" class="dropdown-toggle">
-                                    <img src="" alt="" class="img-responsive img-circle" />&nbsp;
-                                    <span >John Doe</span>&nbsp;
+                                    <span><?php echo session('username'); ?></span>&nbsp;
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user pull-right">
-                                    <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a>
-                                    </li>
                                     <li>
-                                        <a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a>
-                                    </li>
-                                    <li class="divider"></li>
-
-                                    <li>
-                                        <a href="extra-lock-screen.html">
-                                            <i class="fa fa-lock"></i>Lock Screen
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="extra-signin.html">
-                                            <i class="fa fa-key"></i>Log Out
+                                        <a href="__MODULE__/Index/logout">
+                                            <i class="fa fa-key"></i>退出
                                         </a>
                                     </li>
                                 </ul>
@@ -125,8 +103,8 @@
                                 <div class="clearfix"></div>
                             </li>
                             <li>
-                              <a href="index.html">
-                                <i class="fa fa-tachometer fa-fw">
+                              <a href="__MODULE__/Game/rank">
+                                <i class="fa fa-anchor fa-fw">
                                   <div class="icon-bg bg-orange"></div>
                                 </i>
                                 <span class="menu-title">成绩统计</span>
@@ -142,7 +120,7 @@
                             </li>
                             <li>
                               <a href="__MODULE__/Game/add">
-                                <i class="fa fa-tachometer fa-fw">
+                                <i class="fa fa-plus-square fa-fw">
                                   <div class="icon-bg bg-orange"></div>
                                 </i>
                                 <span class="menu-title">添加游戏</span>
