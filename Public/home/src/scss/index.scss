@@ -254,7 +254,7 @@
 	 * 游戏页
 	 */
 	#game {
-		@include setBackground('index.png');
+		@include setBackground('game-bg.png');
 		.one-pic {
 			img {
 				width: 100%;
