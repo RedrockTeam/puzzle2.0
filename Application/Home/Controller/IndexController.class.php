@@ -21,10 +21,7 @@ class IndexController extends Controller {
             if (!$openid) {
                 $this->error('没有openid','http://hongyan.cqupt.edu.cn/puzzle2');
             }
-            //$this->getVerify();
             $this->getTicket();
-            $this->getName();
-            $this->getStuid();
             $signature = $this->JSSDKSignature();
             $this->assign('openid', $openid);
             $this->assign('signature', $signature);
@@ -73,6 +70,7 @@ class IndexController extends Controller {
         $this->secret = sha1(sha1($this->time).md5($this->string)."redrock");
     }
 
+
     //判断关注
     private function getVerify(){
         $t = array(
@@ -90,22 +88,8 @@ class IndexController extends Controller {
             $this->error('没有关注小帮手');
         }
     }
-    
 
-    //username获取
-    private function getName(){
-        $t = array(
-            'string' => $this->string,
-            'token' => 'gh_68f0a1ffc303',
-            'timestamp' => $this->time,
-            'secret' => $this->secret,
-            'openid' => $this->getOpenid(),
-        );
-        $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
-        $result = $this->curl_api($url, $t);
-        session('username', $result->data->nickname);
-    }
-   
+
     private function getTicket(){
         $t = array(
             'string' => $this->string,
@@ -120,7 +104,7 @@ class IndexController extends Controller {
     }
 
     //获取学号
-    private function getStuid($openid){
+    private function getUserInfo($openid){
         $time = time();
         $str = 'abcdefghijklnmopqrstwvuxyz1234567890ABCDEFGHIJKLNMOPQRSTWVUXYZ';
         $string = '';
@@ -130,22 +114,27 @@ class IndexController extends Controller {
         }
         $secret = sha1(sha1($time).md5($string)."redrock");
 
-        $t = array(
+        $verify = array(
             'string' => $string,
             'token' => 'gh_68f0a1ffc303',
             'timestamp' => $time,
             'secret' => $secret,
             'openid' => $openid,
         );
-        $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
-        $result = $this->curl_api($url, $t);
-        // $this->stuId = $result->stuId;
-        return $result;
-        // if ($result->stuId) {
-        //     return $result;
-        // }else{
-        //     $this->error('没有绑定小帮手');
-        // }
+        $stuIdUrl = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/bindVerify";
+        $userInfoUrl = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
+        $userInfo = $this->curl_api($userInfoUrl, $verify);
+        $stuInfo = $this->curl_api($stuIdUrl, $verify);
+
+        if ($stuInfo->stuId) {
+            $userInfo['stuId'] = $stuInfo->stuId;
+        }
+
+        if ($userInfo) {
+            return $userInfo;
+        } else {
+            $this->error('你还有没有绑定重邮小帮手');
+        }
     }
 
     private function getOpenid(){
@@ -202,6 +191,7 @@ class IndexController extends Controller {
         $openid = I('post.openid');
         $mapId = I('post.mapIndex');
         $spendTime = I('post.spendTime');
+        $userInfo = $this->getUserInfo($openid);
 
         $microtime = explode(" ", microtime());
         $spendTime += substr($microtime[0], 0, 8);
@@ -232,8 +222,8 @@ class IndexController extends Controller {
                 'map_id' => $mapId,
                 'openid' => $openid,
                 'play_time' => time(),
-                'username' => 'root',
-                'stuId' => '2013214046',
+                'username' => $userInfo['nickname'],
+                'stuId' => $userInfo['stuId'],
                 'spend_time' => $spendTime
             ));
         }
@@ -265,6 +255,7 @@ class IndexController extends Controller {
             unset($data[$index]['map_id']);
         }
 
+        $userInfo = $this->getUserInfo($openid);
 
         $this->ajaxReturn(array(
             "status" => 200,
@@ -272,7 +263,7 @@ class IndexController extends Controller {
             "data" => array(
                 'list' => $data,
                 'openid' => $openid,
-                'face' => $this->getStuid($openid)
+                'face' => $userInfo['headimgurl']
             )
         ));
 
