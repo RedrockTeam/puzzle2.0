@@ -551,7 +551,7 @@ var resultView = Backbone.View.extend({
     // 结果页面耗时显示
     _spendTimeShow: function(spendTime) {
         var spendTimeImg = $('.spend-time img');
-        for (var i = spendTime.length - 1; i >= 0; i--) {
+        for (var i = 0; i <= spendTime.length - 1; i++) {
             spendTimeImg.eq(i).attr('src', rankImgPath + spendTime[i] + '.png').css('display', 'block');
         }
     }
