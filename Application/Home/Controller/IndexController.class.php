@@ -127,7 +127,7 @@ class IndexController extends Controller {
         $stuInfo = $this->curl_api($stuIdUrl, $verify);
 
         if ($stuInfo->stuId) {
-            $userInfo['stuId'] = $stuInfo->stuId;
+            $userInfo->stuId = $stuInfo->stuId;
         }
 
         if ($userInfo) {
@@ -263,8 +263,7 @@ class IndexController extends Controller {
             "data" => array(
                 'list' => $data,
                 'openid' => $openid,
-                'info' => $userInfo,
-                'face' => $userInfo['headimgurl']
+                'info' => $userInfo
             )
         ));
 
