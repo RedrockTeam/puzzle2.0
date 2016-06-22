@@ -193,7 +193,8 @@ body, html {
             float: left;
             width: 51%; }
             #personal .played-list .played .time .inner img:first-child {
-              transform: scale(1.5); }
+              transform: scale(1.5);
+              margin-bottom: 5%; }
       #personal .played-list .played .name {
         position: relative; }
         #personal .played-list .played .name img {
