@@ -72,7 +72,11 @@
 	                            </div>
 	                        </div>
 	                        <div class="name">
-	                            <img src="__PUBLIC__/home/build/images/personal/<%= game.index %>/name.png">
+                                <% if (game.index == 2) { %>
+                                    <img src="__PUBLIC__/home/build/images/personal/<%= game.index %>/name.png" style="left: 28%; transform: scale(0.52);">
+                                <% } else { %>
+	                               <img src="__PUBLIC__/home/build/images/personal/<%= game.index %>/name.png">
+                                <% } %>
 	                        </div>
 	                        <div class="map">
 	                            <img src="__PUBLIC__/home/build/images/personal/<%= game.index %>/map.png">
