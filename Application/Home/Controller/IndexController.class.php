@@ -222,8 +222,8 @@ class IndexController extends Controller {
                 'map_id' => $mapId,
                 'openid' => $openid,
                 'play_time' => time(),
-                'username' => $userInfo->nickname,
-                'stuId' => $userInfo->stuId,
+                'username' => $userInfo->data->nickname,
+                'stuId' => $userInfo->data->stuId,
                 'spend_time' => $spendTime
             ));
         }
