@@ -279,6 +279,7 @@ var personalView = Backbone.View.extend({
                     $.each($('.inner'), function(index, inner) {
                         if ($(inner).find('img').length > 1) {
                             $(inner).find('img').css('transform', 'scale(0.75)');
+                            $(inner).find('img').eq(0).css('transform', 'scale(1.2)');
                         } else {
                             $(inner).css('left', '40%');
                         }
