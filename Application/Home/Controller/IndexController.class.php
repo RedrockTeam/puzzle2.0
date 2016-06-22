@@ -120,7 +120,7 @@ class IndexController extends Controller {
     }
 
     //获取学号
-    private function getStuid(){
+    private function getStuid($openid){
         $time = time();
         $str = 'abcdefghijklnmopqrstwvuxyz1234567890ABCDEFGHIJKLNMOPQRSTWVUXYZ';
         $string = '';
@@ -135,7 +135,7 @@ class IndexController extends Controller {
             'token' => 'gh_68f0a1ffc303',
             'timestamp' => $time,
             'secret' => $secret,
-            'openid' => $this->getOpenid(),
+            'openid' => $openid,
         );
         $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
         $result = $this->curl_api($url, $t);
@@ -272,7 +272,7 @@ class IndexController extends Controller {
             "data" => array(
                 'list' => $data,
                 'openid' => $openid,
-                'face' => $this->getStuid()
+                'face' => $this->getStuid($openid)
             )
         ));
 
