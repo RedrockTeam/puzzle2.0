@@ -137,7 +137,7 @@ class IndexController extends Controller {
             'secret' => $secret,
             'openid' => $this->openid,
         );
-        $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/bindVerify";
+        $url = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
         $result = $this->curl_api($url, $t);
         // $this->stuId = $result->stuId;
         return $result;
