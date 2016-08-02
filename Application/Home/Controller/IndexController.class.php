@@ -187,6 +187,7 @@ class IndexController extends Controller {
         if ($stuInfo->stuId) {
             $userInfo->data->stuId = $stuInfo->stuId;
         }
+        var_dump($userinfo);
         return $userinfo;
         // if ($userInfo) {
         //     return $userInfo;
