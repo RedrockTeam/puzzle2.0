@@ -9,6 +9,7 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black" /><!-- 状态栏 -->
         <!-- <link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css"> -->
         <link rel="stylesheet" href="__PUBLIC__/home/build/css/index.css">
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/home/build/css/phone.css">
         <script src="__PUBLIC__/home/src/libs/underscore.min.js"></script>
         <script src="__PUBLIC__/home/src/libs/zepto.min.js"></script>
         <script src="__PUBLIC__/home/src/libs/backbone.min.js"></script>
@@ -16,6 +17,26 @@
         <title>重邮拼图系列</title>
     </head>
     <body>
+
+        <!-- 加需求啦,GiantMing 20160802 -->
+        <script type="text/template" id="T_phone">
+            <div id="#phone-div">
+                <form id="phone-form" method="POST">
+                <p>
+                    请填写你的手机号
+                </p>
+                    <p>
+                        <input id="phone-input" type="tel" placeholder="请输入你的手机号码" name="phone">
+                    </p>
+                    <input style="display: none" name="openid"> type="text" value="<?php echo $openid; ?>">
+                    <p>
+                        <button id="submit-btn" type="submit">提交</button>
+                    </p>
+                </form>
+            </div>
+        </script>
+
+
 
         <!-- 首页 -->
         <script type="text/template" id="T_index">

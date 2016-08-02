@@ -1,0 +1,30 @@
+#phone-div {
+  // height: 100%;
+  width: 100%;
+}
+#phone-form {
+  margin-top: 50%;
+}
+#phone-form p {
+  text-align: center;
+}
+#phone-input {
+  border-radius: 10px;
+  border: #ccc solid 1px;
+  width: 80%;
+  padding: 10px 20px;
+}
+#phone-input:focus {
+  outline: none;
+  border-color: #0780e4;
+}
+#submit-btn {
+  font-size: 15px;
+  color: #fff;
+  height: 35px;
+  width: 50%;
+  border-radius: 10px;
+  border: none;
+  background-color: #0684de;
+  outline: none;
+}
