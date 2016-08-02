@@ -1,6 +1,7 @@
 #gnore Files
 .idea
 .DS_Store
+.phpintel
 Application/Runtime
 Application/Common/Conf/config.php
 Application/Home/Conf/config.php
