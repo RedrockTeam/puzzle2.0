@@ -87,7 +87,7 @@ class IndexController extends Controller {
             );
             $result = $Open_id_phone->add($content);
             if($result){
-                $this->display('Index/index');
+                $this->redirect('Index/index');
             }else{
                 $this->error('服务器出错');
             }
