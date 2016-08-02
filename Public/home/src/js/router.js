@@ -3,7 +3,8 @@ var Router = Backbone.Router.extend({
         console.log("Route initialize");
     },
     routes: {
-        '': 'index',
+        '': 'phone',      // 加需求了,要求先填电话号码 冯秋明 20160802
+        'index': 'index',  // 加需求了,要求先填电话号码 冯秋明 20160802
         'choose': 'choose',
         'result/:index/:time/:rank': 'result',
         'game/:id': 'game',
@@ -12,6 +13,13 @@ var Router = Backbone.Router.extend({
 });
 
 var router = new Router();
+
+// 加需求了,要求先填电话号码 冯秋明 20160802
+router.on('route:phone', function() {
+    new phoneView();
+})
+
+
 
 router.on('route:index', function() {
     new indexView();
