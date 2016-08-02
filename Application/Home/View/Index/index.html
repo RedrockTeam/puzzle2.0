@@ -20,17 +20,23 @@
 
         <!-- 加需求啦,GiantMing 20160802 -->
         <script type="text/template" id="T_phone">
-            <div id="#phone-div">
+            <div id="phone-div">
                 <form id="phone-form" method="POST" action = "index.php?s=/Home/Index/addPhone">
-                <p>
-                    请填写你的手机号
-                </p>
-                    <p>
-                        <input id="phone-input" type="tel" placeholder="请输入你的手机号码" name="phone">
-                    </p>
-                    <input style="display: none" name="openid"> type="text" value="<?php echo $openid; ?>">
-                    <p>
-                        <button id="submit-btn" type="submit">提交</button>
+                    <div id="phone-form-div">
+                        <p id="bind-tel-wrap">
+                            <img id="bind-tel" src="__PUBLIC__/home/build/images/phone/bing-tel.png">
+                        </p>
+                        <p id="phone-input-wrap">
+                            <input id="phone-input" type="tel" placeholder="手机号" name="phone">
+                        </p>
+                        <input style="display: none" name="openid" type="text" value="<?php echo $openid; ?>">
+                    </div>
+                    <p id="phone-btn-wrap">
+                        <label for="submit-btn">
+                            
+                            <img  type="submit" id="phone-btn" src="__PUBLIC__/home/build/images/phone/btn1.png">
+                        </label>
+                        <button style="display: none" id="submit-btn" type="submit">提交</button>
                     </p>
                 </form>
             </div>

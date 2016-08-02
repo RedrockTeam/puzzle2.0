@@ -1,30 +1,59 @@
 #phone-div {
-  // height: 100%;
-  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-image: url("../images/phone/bg.jpg");
+}
+#phone-div p {
+  margin: 0;
 }
 #phone-form {
-  margin-top: 50%;
+  height: 100%;
 }
-#phone-form p {
+#phone-form-div {
+  position: relative;
+  margin: 0 auto;
+  margin-top: 70px;
+  width: 87%;
+  height: 50%;
+  overflow: hidden;
+  background-image: url("../images/phone/bg-form.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+#phone-div p {
+  width: 100%;
   text-align: center;
 }
+#bind-tel {
+  width: 60%;
+}
+#phone-div #bind-tel-wrap {
+  // position: absolute;
+  margin-top: 25%;
+}
+#phone-div #phone-input-wrap {
+  margin-top: 10%;
+}
 #phone-input {
-  border-radius: 10px;
-  border: #ccc solid 1px;
-  width: 80%;
-  padding: 10px 20px;
-}
-#phone-input:focus {
-  outline: none;
-  border-color: #0780e4;
-}
-#submit-btn {
-  font-size: 15px;
-  color: #fff;
-  height: 35px;
-  width: 50%;
-  border-radius: 10px;
   border: none;
-  background-color: #0684de;
+  width: 53.9vw;
+  height: 50px;
+  text-align: center;
+  font-size: 18px;
+  color: #e68200;
+  background-image: url("../images/phone/bg-input.png");
+  background-size: 100% 100%;
+  background-color: rgba(255, 255, 255, 0);
   outline: none;
 }
+#phone-input-wrap {
+  margin-top: 10%;
+}
+
+#phone-btn {
+  width: 150px;
+}
+#phone-div #phone-btn-wrap {
+  margin-top: 10%;
+}
+
