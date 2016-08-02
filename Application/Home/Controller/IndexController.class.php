@@ -14,27 +14,74 @@ class IndexController extends Controller {
     public function index(){
 
         $this->code = I('get.code'); 
-        if ($this->code != null || $this->code != ''){
-            $this->code = I('get.code');
-            $this->info();
-            $openid = $this->getOpenid();
-            if (!$openid) {
-                $this->error('没有openid','http://hongyan.cqupt.edu.cn/puzzle2');
-            }
-            $this->getTicket();
-            $signature = $this->JSSDKSignature();
-            $this->assign('openid', $openid);
-            $this->assign('signature', $signature);
-        }else{
-            $qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING'] : $_SERVER['QUERY_STRING'];
-            $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$qs);
-            Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
-        }
+        // if ($this->code != null || $this->code != ''){
+        //     $this->code = I('get.code');
+        //     $this->info();
+        //     $openid = $this->getOpenid();
+        //     if (!$openid) {
+        //         $this->error('没有openid','http://hongyan.cqupt.edu.cn/puzzle2');
+        //     }
+        //     $this->getTicket();
+        //     $signature = $this->JSSDKSignature();
+        //     $this->assign('openid', $openid);
+        //     $this->assign('signature', $signature);
+        // }else{
+        //     $qs = $_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING'] : $_SERVER['QUERY_STRING'];
+        //     $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$qs);
+        //     Header("Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx81a4a4b77ec98ff4&redirect_uri=". $baseUrl ."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect "); 
+        // }
         
         $this->display();
     }
-
-
+    //手机号
+    private function searchPhone($openid){
+        $Open_id_phone = M('openid_phone');
+        $condition = array(
+                'openid' => $openid
+            );
+        $goal = $Open_id_phone->where($condition)->field('phone')->find();
+        if(empty($goal)){
+            $result = array(
+                'status' => '404'
+            );
+        }else{
+            $result = array(
+                'status' => '200',
+                'phone'  => $goal
+            );
+        }
+        return $result;
+    }
+    
+    public function addPhone(){
+        $openid = I('post.openid');
+        $phone_num = I('post.phone_num');
+        $phone = $this->searchPhone($openid);
+        if($phone['status'] == '200'){
+            $this->ajaxReturn(array(
+                "status" => '404',
+                "info" => 'registered'
+            ));
+        }else{
+            $Open_id_phone = M('openid_phone');
+            $content = array(
+                'phone'  => $phone_num,
+                'openid' => $openid
+            );
+            $result = $Open_id_phone->add($content);
+            if($result){
+                $this->ajaxReturn(array(
+                    "status" => '200',
+                    "info" => 'ok'
+                ));
+            }else{
+                $this->ajaxReturn(array(
+                    "status" => '500',
+                    "info" => 'system failed'
+                ));
+            }
+        }
+    }
 
     //jssdk-config
     public function JSSDKSignature(){
@@ -191,8 +238,8 @@ class IndexController extends Controller {
         $openid = I('post.openid');
         $mapId = I('post.mapIndex');
         $spendTime = I('post.spendTime');
-        $userInfo = $this->getUserInfo($openid);
-
+        //$userInfo = $this->getUserInfo($openid);
+        $phone = $this->searchPhone($openid);
         $microtime = explode(" ", microtime());
         $spendTime += substr($microtime[0], 0, 8);
 
@@ -224,7 +271,8 @@ class IndexController extends Controller {
                 'play_time' => time(),
                 'username' => $userInfo->data->nickname,
                 'stuId' => $userInfo->data->stuId,
-                'spend_time' => $spendTime
+                'spend_time' => $spendTime,
+                'phone'  => $phone['phone']
             ));
         }
         $this->ajaxReturn(array(
@@ -249,6 +297,7 @@ class IndexController extends Controller {
             unset($data[$index]['openid']);
             unset($data[$index]['username']);
             unset($data[$index]['play_time']);
+            unset($data[$index]['phone']);
             $data[$index]['time'] = implode(array_reverse(str_split((string)floor($data[$index]['spend_time']), 1)));
             $data[$index]['index'] = floor($data[$index]['map_id']);
             unset($data[$index]['spend_time']);
