@@ -183,7 +183,7 @@ class IndexController extends Controller {
         $userInfoUrl = "http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Api/Api/userInfo";
         $userInfo = $this->curl_api($userInfoUrl, $verify);
         $stuInfo = $this->curl_api($stuIdUrl, $verify);
-        var_dump($userinfo);
+        
         if ($stuInfo->stuId) {
             $userInfo->data->stuId = $stuInfo->stuId;
         }
