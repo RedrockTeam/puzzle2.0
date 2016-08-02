@@ -101,7 +101,7 @@ var util = (function() {
             dataType: 'json',
             success: success,
             error: function(xhr, type) {
-                alert('网络错误, 请重试!');
+                alert('网络错误, 请重试!!');
             }
         });
     };
@@ -153,6 +153,68 @@ var util = (function() {
         getSpendTimeInfo: getSpendTimeInfo
     };
 })();
+
+
+/**
+ * 输入电话的 view
+ * 冯秋明 加于2016 08 02
+ */
+var phoneView = Backbone.View.extend({
+    el: 'body',
+    template: _.template($('#T_phone').html()),
+    initialize: function() {
+        var that = this;
+        this.isInputedPhone(function() {
+            that.goToIndexView();
+        }, function() {
+            that.$el.html(that.template());
+        });
+    },
+    events: {
+        'submit #phone-form': 'submitForm',
+    },
+    submitForm: function(e) {
+        var inputTel = $('#phone-input').val();
+
+        if(this.verifyForm(inputTel)) {
+            this.goToIndexView();
+        } else {
+            alert('请填写正确的手机号码哦~~');
+            return false;
+        };
+    },
+    goToIndexView: function() {
+        router.navigate('/index', {
+            trigger: true
+        });
+    },
+    // 判断是否已经输入过手机号码, 是: cb1(), 否: cb2();
+    isInputedPhone: function(cb1, cb2) {
+        $.ajax({
+            url: '',
+            type: 'POST',
+            data: {
+                openid: $('html').attr('data-openid')
+            },
+            success: function(data, status) {
+                if(data.status === 200) {
+                    cb1();
+                } else if(data.status === 404) {
+                    cb2();
+                }
+            },
+        });
+    },
+    // 表单验证
+    verifyForm: function(inputInfo) {
+        var isAllNum = !/\D+/.test(inputInfo);     // 全部数字
+        var isLength = inputInfo.length === 11;   // 长度要求是11
+
+        return isAllNum && isLength;
+    }
+});
+// end
+
 
 <!-- 首页 -->
 var indexView = Backbone.View.extend({
