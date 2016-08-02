@@ -187,12 +187,12 @@ class IndexController extends Controller {
         if ($stuInfo->stuId) {
             $userInfo->data->stuId = $stuInfo->stuId;
         }
-
-        if ($userInfo) {
-            return $userInfo;
-        } else {
-            $this->error('你还有没有绑定重邮小帮手');
-        }
+        return $userinfo;
+        // if ($userInfo) {
+        //     return $userInfo;
+        // } else {
+        //     $this->error('你还有没有绑定重邮小帮手');
+        // }
     }
 
     private function getOpenid(){
@@ -249,7 +249,7 @@ class IndexController extends Controller {
         $openid = I('post.openid');
         $mapId = I('post.mapIndex');
         $spendTime = I('post.spendTime');
-        //$userInfo = $this->getUserInfo($openid);
+        $userInfo = $this->getUserInfo($openid);
         $phone = $this->searchPeo($openid);
         $microtime = explode(" ", microtime());
         $spendTime += substr($microtime[0], 0, 8);
@@ -281,7 +281,7 @@ class IndexController extends Controller {
                 'openid' => $openid,
                 'play_time' => time(),
                 'username' => $userInfo->data->nickname,
-                'stuId' => $userInfo->data->stuId,
+                //'stuId' => $userInfo->data->stuId,
                 'spend_time' => $spendTime,
                 'phone'  => $phone['phone']
             ));
