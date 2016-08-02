@@ -191,7 +191,7 @@ var phoneView = Backbone.View.extend({
     // 判断是否已经输入过手机号码, 是: cb1(), 否: cb2();
     isInputedPhone: function(cb1, cb2) {
         $.ajax({
-            url: '',
+            url: 'index.php?s=/Home/Index/searchPhone',
             type: 'POST',
             data: {
                 openid: $('html').attr('data-openid')
