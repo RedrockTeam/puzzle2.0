@@ -67,7 +67,7 @@ class IndexController extends Controller {
         }else{
             $result = array(
                 'status' => 200,
-                'phone'  => $goal
+                'phone'  => $goal['phone']
             );
         }
         return $result;
@@ -251,6 +251,7 @@ class IndexController extends Controller {
         $spendTime = I('post.spendTime');
         $userInfo = $this->getUserInfo($openid);
         $phone = $this->searchPeo($openid);
+        var_dump($phone);
         $microtime = explode(" ", microtime());
         $spendTime += substr($microtime[0], 0, 8);
 
