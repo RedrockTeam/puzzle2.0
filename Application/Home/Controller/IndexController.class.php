@@ -251,7 +251,7 @@ class IndexController extends Controller {
         $spendTime = I('post.spendTime');
         $userInfo = $this->getUserInfo($openid);
         $phone = $this->searchPeo($openid);
-        var_dump($phone);
+
         $microtime = explode(" ", microtime());
         $spendTime += substr($microtime[0], 0, 8);
 
