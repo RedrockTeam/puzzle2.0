@@ -255,9 +255,13 @@ var chooseView = Backbone.View.extend({
             index: 2,
             class: 'middle'
         }, {
-            index: 'null',
+            index: 3,
             class: 'right'
         }];
+        // }, {
+        //     index: 'null',
+        //     class: 'right'
+        // }];
         this.$el.html(this.template({
             mapData: mapData
         }));
