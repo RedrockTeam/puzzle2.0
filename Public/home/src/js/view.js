@@ -163,6 +163,7 @@ var phoneView = Backbone.View.extend({
     el: 'body',
     template: _.template($('#T_phone').html()),
     initialize: function() {
+        this.$el.off();
         var that = this;
         this.isInputedPhone(function() {
             that.goToIndexView();
@@ -221,6 +222,7 @@ var indexView = Backbone.View.extend({
     el: 'body',
     template: _.template($('#T_index').html()),
     initialize: function() {
+        this.$el.off();
         this.$el.html(this.template());
     },
     events: {
@@ -244,6 +246,7 @@ var chooseView = Backbone.View.extend({
     el: 'body',
     template: _.template($('#T_choose').html()),
     initialize: function() {
+        this.$el.off();
         this.currentMapindex = 2;
         var mapData = [{
             index: 1,
@@ -317,6 +320,7 @@ var personalView = Backbone.View.extend({
     el: 'body',
     template: _.template($('#T_personal').html()),
     initialize: function() {
+        this.$el.off();
         this.render();
     },
     render: function() {
@@ -367,6 +371,7 @@ var gameView = Backbone.View.extend({
     el: 'body',
     template: _.template($('#T_game').html()),
     initialize: function(mapIndex) {
+        this.$el.off();
         this._initGame(mapIndex);
     },
     events: {
@@ -588,6 +593,7 @@ var resultView = Backbone.View.extend({
     mapIndex: '',
     template: _.template($('#T_result').html()),
     initialize: function(mapIndex, time, rank) {
+        this.$el.off();
         this.mapIndex = mapIndex;
         this.$el.html(this.template());
         this._rankInfoShow(rank);
