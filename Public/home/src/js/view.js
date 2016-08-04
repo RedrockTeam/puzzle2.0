@@ -309,7 +309,7 @@ var chooseView = Backbone.View.extend({
         $($maps[2]).attr('src', firstSrc);
     },
     startGame: function() {
-        if (this.currentMapindex != 3) {
+        if (this.currentMapindex != 4) {
             $(this.el).undelegate('.next-map', 'click');
             $(this.el).undelegate('.prev-map', 'click');
             router.navigate('/game/' + this.currentMapindex, {
