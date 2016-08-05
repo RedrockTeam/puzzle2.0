@@ -93,7 +93,7 @@
 	                        <div class="time">
 	                            <div class="inner">
                                     <img src="__PUBLIC__/home/build/images/personal/number/miao.png">
-                                    <% for (var i = 0; i < game.time.length; i++) { %>
+                                    <% for (var i = game.time.length - 1; i >= 0; i++) { %>
                                         <img src="__PUBLIC__/home/build/images/personal/number/<%= game.time[i] %>.png">
                                     <% } %>
 	                            </div>
