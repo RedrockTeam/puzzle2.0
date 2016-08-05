@@ -201,7 +201,7 @@ body, html {
           position: absolute;
           left: 43%;
           bottom: 25%;
-          height: 50%; }
+          width: 35%; }
       #personal .played-list .played .map img {
         position: relative;
         left: 5%;
