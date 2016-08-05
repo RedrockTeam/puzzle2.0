@@ -93,13 +93,13 @@
 	                        <div class="time">
 	                            <div class="inner">
                                     <img src="__PUBLIC__/home/build/images/personal/number/miao.png">
-                                    <% for (var i = game.time.length - 1; i >= 0; i--) { %>
+                                    <% for (var i = 0; i < game.time.length; i++) { %>
                                         <img src="__PUBLIC__/home/build/images/personal/number/<%= game.time[i] %>.png">
                                     <% } %>
 	                            </div>
 	                        </div>
 	                        <div class="name">
-                                <% if (game.index == 2) { %>
+                                <% if (game.index == 20) { %>
                                     <img src="__PUBLIC__/home/build/images/personal/<%= game.index %>/name.png" style="left: 28%; transform: scale(0.52);">
                                 <% } else { %>
 	                               <img src="__PUBLIC__/home/build/images/personal/<%= game.index %>/name.png">
