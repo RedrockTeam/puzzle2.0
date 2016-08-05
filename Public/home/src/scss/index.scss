@@ -232,7 +232,7 @@
 						position: absolute;
 						left: 43%;
 						bottom: 25%;
-						width: 35%;
+						width: 35%; //这里应该定宽,不是定高 , 已经手动编译 GiantMing
 					}
 				}
 				.map {
