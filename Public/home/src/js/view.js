@@ -605,12 +605,16 @@ var resultView = Backbone.View.extend({
     },
     events: {
         'click .replay-btn': 'rePlayGame', // 发表评论
-        'click .choose-btn': 'goToChooseView' // 发表评论
+        'click .choose-btn': 'goToChooseView',  // 发表评论
+        'click .share-btn': 'fuckShare'    // 这个按钮没卵用,我要alert一下 giantming
     },
     rePlayGame: function() {
         router.navigate('/game/' + this.mapIndex, {
             trigger: true
         });
+    },
+    fuckShare: function() {
+        alert('请点击右上角分享哦~');
     },
     // 结果页面排名显示
     _rankInfoShow: function(rankInfo) {
