@@ -619,19 +619,19 @@ var resultView = Backbone.View.extend({
     // 结果页面排名显示
     _rankInfoShow: function(rankInfo) {
         rankInfo = String(rankInfo).split("").reverse().join("");
-        for (var i = 0; i < rankInfo.length; i++) {
+        for (var i = rankInfo.length - 1; i >= 0; i--) {
             $('.rank-info img').eq(i).attr('src', rankImgPath + rankInfo[i] + '.png').css('display', 'block');
-        } // giantming 分数显示反了
-        // for (var i = rankInfo.length - 1; i >= 0; i--) {
-        //     $('.rank-info img').eq(i).attr('src', rankImgPath + rankInfo[i] + '.png').css('display', 'block');
-        // }
+        }
     },
 
     // 结果页面耗时显示
     _spendTimeShow: function(spendTime) {
         var spendTimeImg = $('.spend-time img');
-        for (var i = 0; i <= spendTime.length - 1; i++) {
-            spendTimeImg.eq(i).attr('src', rankImgPath + spendTime[i] + '.png').css('display', 'block');
+        for (var i = 0, len = spendTime.length; i < len; i++) {
+            spendTimeImg.eq(i).attr('src', rankImgPath + spendTime[len-i-1] + '.png').css('display', 'block');
         }
+        // for (var i = 0; i <= spendTime.length - 1; i++) {
+        //     spendTimeImg.eq(i).attr('src', rankImgPath + spendTime[i] + '.png').css('display', 'block');
+        // }
     }
 });
